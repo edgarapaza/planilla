@@ -18,7 +18,8 @@ class Login extends Controller
 		if($data['chkusu'] == 1){
 			session_start();
 			$_SESSION['katari'] = $data['personal'];
-			$this->view->Render('main/index');
+			//$this->view->Render('main/index');
+			header('location: '. constant('URL').'main/');
 		}else{
 			$this->view->mensaje = "Usuario o contraseña incorrecta";
 			$this->view->Render('login/index');
