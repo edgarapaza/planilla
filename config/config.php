@@ -1,11 +1,11 @@
 <?php
 
-define('URL', 'http://localhost/acentral/');
+define('URL', 'http://localhost/planilla/');
 
-define('COMPANY', 'Archivo Central - Katari');
+define('COMPANY', 'Planillas - DRTC');
 define('HOST', 'localhost');
 define('USER', 'usuario');
-define('DB', 'acentral');
+define('DB', 'mtc');
 define('PASSWORD', 'archivo123$');
 define('CHATSET', 'utf8');
 
