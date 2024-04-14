@@ -43,12 +43,12 @@
           <li><a href="#">Configuración</a></li>
           <li><a href="#">Cambiar Contraseña</a></li>
           <li><hr></li>
-          <li><a href="#">Salir</a></li>
+          <li><a href="<?php echo constant('URL');?>salir">Salir</a></li>
         </ul>
 
       </li>
 
-      <li><a class="button">Salir</a></li>
+      <li><a href="<?php echo constant('URL');?>salir" class="button">Salir</a></li>
     </ul>
   </div>
 </div>

@@ -17,38 +17,37 @@
   </div>
 
   <div class="grid-x">
-    <div class="cell">
+    <div class="cell large-12">
       <h4>Tabla</h4>
       <table>
-  <thead>
-    <tr>
-      <th width="200">Table Header</th>
-      <th>Table Header</th>
-      <th width="150">Table Header</th>
-      <th width="150">Table Header</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-  </tbody>
-</table>
+        <thead>
+          <tr>
+            <th>Num</th>
+            <th>Nombre y apellidos</th>
+            <th>Cargo</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Final</th>
+            <th>Ingreso</th>
+            <th>Impresion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>1</td>
+          <td>Juan Carlos Tolima Cruz</td>
+          <td>Tec. Admin III</td>
+          <td>1978</td>
+          <td>2023</td>
+          <td>
+            <a href="#" class="button">Ingresar Planilla</a> |
+            <a href="#" class="button">Editar</a>
+          </td>
+          <td>
+            <a href="#" class="button success">Planilla</a>
+            <a href="#" class="button success">FONAVI</a>
+            <a href="#" class="button success">Liquidacion</a>
+          </td>
+        </tbody>
+      </table>
     </div>
   </div>
 

@@ -45,7 +45,7 @@ class App
         $controller->render();
       }
     } else {
-      echo "No se ha logueado";
+      #echo "No se ha logueado";
 
       if (empty($url[0])) {
         #echo "URL vacia";
