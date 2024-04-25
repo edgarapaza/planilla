@@ -12,6 +12,12 @@ class Main extends Controller
 	{
 		$this->view->Render('main/index');
 	}
+	public function renderPlanilla($param = null){
+		$id = $param[0];
+		$data = $this->model->GetPlanilla($id);
+		$this->view->data = $data;
+		$this->view->Render('planilla/index');
+	}
 	public function read(){
 		$data = $this->model->Read();
 		$json = array();
@@ -28,8 +34,11 @@ class Main extends Controller
 		echo json_encode($json);
 	}
 	public function search(){
-		$data = $_POST['search'];
-		$data = $this->model->Search($data);
+		$nombres = $_POST['nombres'];
+		$ap = $_POST['ap'];
+		$am = $_POST['am'];
+		$cargo = $_POST['cargo'];
+		$data = $this->model->Search($nombres,$ap,$am,$cargo);
 		$json = array();
 		while($row = mysqli_fetch_array($data)){
 			$json[] = array(
@@ -41,6 +50,7 @@ class Main extends Controller
 			);
 			
 		}
+		
 		echo json_encode($json);
 	}	
 }

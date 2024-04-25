@@ -1,0 +1,47 @@
+:root {
+    --blue-50: #eaf3ff;
+    --blue-100: #dae9ff;
+    --blue-200: #bcd6ff;
+    --blue-300: #93b9ff;
+    --blue-400: #6890ff;
+    --blue-500: #4568ff;
+    --blue-600: #253bff;
+    --blue-700: #2031e9;
+    --blue-800: #1828bb;
+    --blue-900: #1d2c92;
+    --blue-950: #111855;
+}
+.grid-container {
+    max-width: none !important;
+}
+
+.title-bar {
+    background-color: var(--blue-800);
+}
+
+.titulo {
+    margin-top: 10px;
+    color: var(--blue-700);
+    font-weight: bold;
+}
+
+h3 {
+    color: var(--blue-100);
+    font-weight: bold;
+}
+
+label {
+    font-size: 1.25rem !important;
+    color: var(--blue-950);
+    padding-right: 1rem;/*Eliminar esta linea para alinear a la izquierda*/
+}
+span{
+    display: flex;
+    text-align: right;/*Eliminar esta linea para alinear a la izquierda*/
+}
+#idpersonal{
+    display: none;
+}
+#id{
+    display: none;
+}

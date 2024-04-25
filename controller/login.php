@@ -18,6 +18,7 @@ class Login extends Controller
 		if($data['chkusu'] == 1){
 			session_start();
 			$_SESSION['katari'] = $data['personal'];
+			$_SESSION['idper'] = $data['idpersonal'];
 			//$this->view->Render('main/index');
 			header('location: '. constant('URL').'main/');
 		}else{

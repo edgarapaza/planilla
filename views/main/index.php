@@ -1,7 +1,8 @@
 <?php require ('views/header.php'); ?>
 
-<div class="grid-container">
-  <div class="grid-x">
+<link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/buscar.css">
+<div class="grid-container full margin-1">
+  <!-- <div class="grid-x">
     <div class="cell small-12">
       <div class="input-group searchbar">
         <div class="input-group-button">
@@ -15,11 +16,60 @@
         <input class="input-field search-field" type="search" id="search" placeholder="Escribe un nombre o apellido..." />
       </div>
     </div>
+  </div> -->
+  <div class="grid-x margin-vertical-1 large-up-4">
+    <div class="cell">
+      <h5>Busqueda por nombres</h5>
+      <div class="search-zeta">
+        <div class="search" id="search">
+          <div class="icon" id="icon"></div>
+          <div class="input">
+            <input type="text" placeholder="Search" id="mysearch" class="input-zeta">
+          </div>
+          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <h5>Busqueda por apellido paterno</h5>
+      <div class="search-zeta">
+        <div class="search" id="search">
+          <div class="icon" id="icon"></div>
+          <div class="input">
+            <input type="text" placeholder="Search" id="mysearch1" class="input-zeta">
+          </div>
+          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <h5>Busqueda por apellido materno</h5>
+      <div class="search-zeta">
+        <div class="search" id="search">
+          <div class="icon" id="icon"></div>
+          <div class="input">
+            <input type="text" placeholder="Search" id="mysearch2" class="input-zeta">
+          </div>
+          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <h5>Busqueda por cargo</h5>
+      <div class="search-zeta">
+        <div class="search" id="search">
+          <div class="icon" id="icon"></div>
+          <div class="input">
+            <input type="text" placeholder="Search" id="mysearch3" class="input-zeta">
+          </div>
+          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+        </div>
+      </div>
+    </div>
   </div>
-
   <div class="grid-x">
     <div class="cell large-12">
-      <h4>Tabla</h4>
+      <h4>Registros</h4>
       <table>
         <thead>
           <tr>
@@ -51,12 +101,9 @@
           </tr>
         </tbody>
       </table>
-      <div id="paginacion">
-
-          </div>
+      <div id="paginacion"></div>
     </div>
   </div>
-  <script src="<?php echo constant('URL') . 'public/js/main.js'; ?>"></script>
 </div>
-
+<script src="<?php echo constant('URL') . 'public/js/main.js'; ?>"></script>
 <?php require ('views/footer.php'); ?>

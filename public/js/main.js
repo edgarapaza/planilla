@@ -1,10 +1,13 @@
 //console.log("funciona!!!");
+// agregar editar-> debe tener un filtro por fecha
+// al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
+// automaticamente
 var registrosPorPagina = 100;
 var paginaActual = 1;
 var paginasMostradas = 7;
 // TABLA: MUESTRA TODAS LAS PLANILLAS
 function table() {
-    var inicio = (paginaActual - 1) * registrosPorPagina;
+  var inicio = (paginaActual - 1) * registrosPorPagina;
   var fin = inicio + registrosPorPagina;
   $.ajax({
     type: "GET",
@@ -16,15 +19,15 @@ function table() {
       let html = "";
       data.forEach((element) => {
         html += `
-                <tr>
+                <tr id="${element.id}">
                     <td>${element.id}</td>
                     <td>${element.nombres}</td>
                     <td>${element.cargo}</td>
                     <td>${element.fecha_inicial}</td>
                     <td>${element.fecha_final}</td>
                     <td>
-                    <a href="#" class="button">Ingresar Planilla</a> |
-                    <a href="#" class="button">Editar</a>
+                    <a href="http://localhost/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
+                    <a href="http://localhost/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
                     </td>
                     <td>
                     <a href="#" class="button success">Planilla</a>
@@ -43,20 +46,21 @@ function table() {
   });
 }
 // BUSCADOR: BUSCA COICIDENCIAS DE TEXTO, POR: nombres, y , apellido paterno
-$("#search").keyup(function () {
-  if ($("#search").val()) {
-    let search = $("#search").val();
-    //console.log(search);
-    $.ajax({
-      type: "POST",
-      url: "http://localhost/planilla/main/search",
-      data: { search },
-      success: function (response) {
-        //console.log(response);
-        let data = JSON.parse(response);
-        let html = "";
-        data.forEach((element) => {
-            html += `
+$("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
+  var nombres = $("#mysearch").val();
+  var ap = $("#mysearch1").val();
+  var am = $("#mysearch2").val();
+  var cargo = $("#mysearch3").val();
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/planilla/main/search",
+    data: { nombres, ap, am, cargo },
+    success: function (response) {
+      console.log(response);
+      let data = JSON.parse(response);
+      let html = "";
+      data.forEach((element) => {
+        html += `
                     <tr>
                         <td>${element.id}</td>
                         <td>${element.nombres}</td>
@@ -64,8 +68,7 @@ $("#search").keyup(function () {
                         <td>${element.fecha_inicial}</td>
                         <td>${element.fecha_final}</td>
                         <td>
-                        <a href="#" class="button">Ingresar Planilla</a> |
-                        <a href="#" class="button">Editar</a>
+                        <a href="http://localhost/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
                         </td>
                         <td>
                         <a href="#" class="button success">Planilla</a>
@@ -73,68 +76,65 @@ $("#search").keyup(function () {
                         <a href="#" class="button success">Liquidacion</a>
                         </td>
                     </tr>`;
-        });
-        
-        $("#datos").html(html);
-      },
-      error: function (error) {
-        console.error("Error en la solicitud", error);
-      },
-    });
-  } else {
-    table();
-  }
+      });
+
+      $("#datos").html(html);
+    },
+    error: function (error) {
+      console.error("Error en la solicitud", error);
+    },
+  });
 });
 
 // Paginacion Tables
 function crearControlesPaginacion(datos) {
-    var totalPaginas = Math.ceil(datos.length / registrosPorPagina);
-  
-    $("#paginacion").empty();
-    var inicio = Math.max(1, paginaActual - Math.floor(paginasMostradas / 2));
-    var fin = Math.min(totalPaginas, inicio + paginasMostradas - 1);
-  
-    // Botón de página anterior
-    if (paginaActual > 1) {
-      $("#paginacion").append(
-        '<button class="button pagina" data-pagina="' +
-          (paginaActual - 1) +
-          '">Anterior</button>'
-      );
-    }
-  
-    // Botones de páginas
-    for (var i = inicio; i <= fin; i++) {
-      $("#paginacion").append(
-        '<button class="button pagina ' +
-          (i === paginaActual ? "activo" : "") +
-          '" data-pagina="' +
-          i +
-          '">' +
-          i +
-          "</button>"
-      );
-    }
-  
-    // Botón de página siguiente
-    if (paginaActual < totalPaginas) {
-      $("#paginacion").append(
-        '<button class="button pagina" data-pagina="' +
-          (paginaActual + 1) +
-          '">Siguiente</button>'
-      );
-    }
+  var totalPaginas = Math.ceil(datos.length / registrosPorPagina);
+
+  $("#paginacion").empty();
+  var inicio = Math.max(1, paginaActual - Math.floor(paginasMostradas / 2));
+  var fin = Math.min(totalPaginas, inicio + paginasMostradas - 1);
+
+  // Botón de página anterior
+  if (paginaActual > 1) {
+    $("#paginacion").append(
+      '<button class="button pagina" data-pagina="' +
+        (paginaActual - 1) +
+        '">Anterior</button>'
+    );
   }
-  
-  // Mostrar datos iniciales y controles de paginación
-  // mostrarDatos();
+
+  // Botones de páginas
+  for (var i = inicio; i <= fin; i++) {
+    $("#paginacion").append(
+      '<button class="button pagina ' +
+        (i === paginaActual ? "activo" : "") +
+        '" data-pagina="' +
+        i +
+        '">' +
+        i +
+        "</button>"
+    );
+  }
+
+  // Botón de página siguiente
+  if (paginaActual < totalPaginas) {
+    $("#paginacion").append(
+      '<button class="button pagina" data-pagina="' +
+        (paginaActual + 1) +
+        '">Siguiente</button>'
+    );
+  }
+}
+
+// Mostrar datos iniciales y controles de paginación
+// mostrarDatos();
+table();
+//crearControlesPaginacion();
+
+// Cambiar de página al hacer clic en un botón de paginación
+$(document).on("click", ".pagina", function () {
+  paginaActual = parseInt($(this).data("pagina"));
   table();
+  // mostrarDatos();
   //crearControlesPaginacion();
-  
-  // Cambiar de página al hacer clic en un botón de paginación
-  $(document).on("click", ".pagina", function () {
-    paginaActual = parseInt($(this).data("pagina"));
-    table();
-    // mostrarDatos();
-    //crearControlesPaginacion();
-  });
+});

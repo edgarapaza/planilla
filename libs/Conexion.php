@@ -20,7 +20,7 @@ class Conexion
     #echo $this->conn->host_info . " ANTARES";
     return $this->conn;
   }
-
+// borrar los echos de excepciones en PRODUCCION
   public function ConsultaSin($sql)
   {
     # Sirve para: INSERT, UPDATE, DELETE

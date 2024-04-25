@@ -21,12 +21,12 @@
         <div class="row">
           <div class="small-12 columns">
             <label>Usuario
-              <input type="text" name="usuario" id="usuario" placeholder="">
+              <input type="text" name="usuario" id="usuario" placeholder="" value="edgar">
             </label>
           </div>
           <div class="small-12 columns">
             <label>Password
-              <input type="password" name="passwd" id="passwd" placeholder="***">
+              <input type="password" name="passwd" id="passwd" placeholder="***" value="edgar">
             </label>
             <button type="submit" class="button">Ingresar</button>
           </div>
