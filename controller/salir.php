@@ -12,6 +12,6 @@ class Salir extends Controller
   {
     session_destroy();
     $_SESSION['katari'] = "";
-    $this->view->Render('login/index');
+    $this->view->Render('inicio/index');
   }
 }

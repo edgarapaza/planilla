@@ -18,19 +18,12 @@
   <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/footer.css">
 
   <script src="<?php echo constant('URL'); ?>public/js/jquery.js"></script>
-  
-  
+
+
 </head>
 
 <body>
-
-  <!-- Navigation -->
-  <div class="title-bar" data-responsive-toggle="realEstateMenu" data-hide-for="small">
-    <button class="menu-icon" type="button" data-toggle></button>
-    <div class="title-bar-title">Menu</div>
-  </div>
-
-  <div class="top-bar" id="realEstateMenu">
+  <!-- <div class="top-bar" id="realEstateMenu">
     <div class="top-bar-left">
       <ul class="dropdown menu" data-dropdown-menu>
         <li class="menu-text"><span><?php echo constant('COMPANY'); ?></span></li>
@@ -61,6 +54,38 @@
 
         <li><a href="<?php echo constant('URL'); ?>salir" class="button">Salir</a></li>
       </ul>
+    </div>
+  </div> -->
+  <div class="grid-x header-z">
+    <div class="cell large-3">
+      <div class="img-t">
+        <img class="logo-t" src="https://www.tramites.transportespuno.gob.pe/img/mesadepartes.png" alt="">
+      </div>
+    </div>
+    <div class="cell large-6">
+      <div class="grid-x margin-top-1">
+        <div class="cell large-4 text-center">
+          <p class="lead">
+            Servicios Prestados
+          </p>
+        </div>
+        <div class="cell large-4 text-center">
+          <p class="lead">
+            Aportaciones Fonavi
+          </p>
+        </div>
+        <div class="cell large-4 text-center">
+          <p class="lead">
+            Liquidaciones
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="cell large-3 margin-top-1">
+      <div class="grid-x large-up-6 align-spaced">
+        <a href="<?php echo constant('URL'); ?>inicio/login" class="ingresar">Ingresar</a>
+        <button class="button-register">Registrarse</button>
+      </div>
     </div>
   </div>
   <!-- /Navigation -->

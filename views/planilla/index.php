@@ -1,31 +1,45 @@
-<?php require ('views/header.php'); 
-echo 'ID: '.$_SESSION['idper']. '----Nombre: '.$_SESSION['katari'];
+<?php require ('views/headerSesion.php');
+//echo 'ID: '.$_SESSION['idper']. '----Nombre: '.$_SESSION['katari'];
 ?>
 <link rel="stylesheet" href="<?php echo constant('URL') . 'public/css/planilla.css' ?>">
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="callout text-center">
+            <h2 id="title-modal"></h2>
+            <img src="" alt="modal-img" class="img-modal" id="img-modal">
+            <p id="text-modal">Contenido de la ventana modal aquí</p>
+            <button class="close-modal">Cerrar</button>
+        </div>
+    </div>
+</div>
 <div class="grid-container">
     <div class="cell text-center titulo">
         <h4>CONST. DE PAGO DE HABERES Y DESCTOS. PARA RECONOCIMIENTOS DE TIEMPO DE SERVICIOS</h4>
     </div>
     <div class="">
-        <form action="<?php echo constant('URL') . 'planilla/create' ?>" method="POST" class="grid-x large-up-2 grid-margin-x">
+        <form id="planillaForm" method="POST" class="grid-x large-up-2 grid-margin-x">
             <div class="cell callout">
                 <div class="grid-x">
                     <div class="cell">
                         <span class="">
                             <label for="nombres" class="large-4">Nombres :</label>
-                            <input type="text" name="nombres" id="nombres" placeholder="Nombres" value="<?php echo @$this->data['nombres'];?>">
+                            <input type="text" name="nombres" id="nombres" placeholder="Nombres"
+                                value="<?php echo @$this->data['nombres']; ?>">
                         </span>
                         <span>
                             <label for="apellidop" class="large-4">Apellido Paterno :</label>
-                            <input type="text" name="apellidopa" id="apellidop" placeholder="Apellido paterno" value="<?php echo @$this->data['ap'];?>">
+                            <input type="text" name="apellidopa" id="apellidop" placeholder="Apellido paterno"
+                                value="<?php echo @$this->data['ap']; ?>">
                         </span>
                         <span>
                             <label for="apellidom" class="large-4">Apellido Materno :</label>
-                            <input type="text" name="apellidoma" id="apellidom" placeholder="Apellido Materno" value="<?php echo @$this->data['am'];?>">
+                            <input type="text" name="apellidoma" id="apellidom" placeholder="Apellido Materno"
+                                value="<?php echo @$this->data['am']; ?>">
                         </span>
                         <span>
                             <label for="cargo" class="large-4">Cargo :</label>
-                            <input type="text" name="cargo" id="cargo" placeholder="Cargo" value="<?php echo @$this->data['cargo'];?>">
+                            <input type="text" name="cargo" id="cargo" placeholder="Cargo"
+                                value="<?php echo @$this->data['cargo']; ?>">
                         </span>
                     </div>
                 </div>
@@ -126,16 +140,19 @@ echo 'ID: '.$_SESSION['idper']. '----Nombre: '.$_SESSION['katari'];
                     </div>
                     <div class="cell">
                         <div class="grid-x align-spaced">
-                            <input type="text" name="idpersonal" value="<?php echo $_SESSION['idper'];?>" id="idpersonal" placeholder="00.0" hidden>
-                            <div class="cell small-3"><button type="submit" class="button success">GUARDAR TODO</button></div>
-                            <div class="cell small-3"><button class="button warning">CANCELAR</button></div>
-                            <div class="cell small-3"><button class="button alert">SALIR</button></div>
+                            <input type="text" name="idpersonal" value="<?php echo $_SESSION['idper']; ?>"
+                                id="idpersonal" placeholder="00.0" hidden>
+                            <div class="cell small-3"><button type="submit" class="button success">GUARDAR TODO</button>
+                            </div>
+                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/render" class="button warning">Menu</a></div>
+                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/inicio" class="button alert">SALIR</a></div>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+    <script src="<?php echo constant('URL'); ?>public/js/planilla.js"></script>
 </div>
 
 <?php require ('views/footer.php'); ?>

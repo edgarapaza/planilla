@@ -18,7 +18,47 @@ body::before {
   border-bottom: 2px solid black;
 }
 
-
+/*HEADER ---------------*/
+.header-z{
+  height: 10vh;
+}
+.img-t{
+  margin-top: 0.8rem;
+  margin-left: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+.logo-t{
+  width: 18rem;
+}
+.ingresar{
+  padding: .8rem;
+  color: #1d95f7;
+  border: 1px #1d95f7 solid;
+  border-radius: 10px;
+}
+.button-register{
+  padding: .8rem;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  background-color: #1d95f7;
+  border-color: #1d95f7;
+}
+/*HEADER END*/
+/*HEADER SESION*------*-*-*-*-*-*-*-**/
+.name-z{
+  font-size: 1.06rem;
+  color: #1d95f7;
+  padding: 5px;
+  border: 1px #1d95f7 solid;
+}
+.salir{
+  font-size: 1.1rem;
+  border-radius: 10px !important;
+}
+/*HEADER SESION END---------------*/
 .marketing-site-footer {
   background: #2c3840;
   color: #8aa0ae;

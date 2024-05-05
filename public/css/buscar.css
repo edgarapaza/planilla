@@ -133,3 +133,46 @@ svg {
 }
 
 /*# sourceMappingURL=buscar.css.map */
+.img-z{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-z img{
+  margin: 4rem;
+}
+.cards .grid-x{
+  width: 40rem !important;display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cards .grid-x .imagenes-z,
+.cards .grid-x .cell{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards .imagenes-z .imagen-enlace{
+  width: 60%;
+}
+.texto-z{
+  color: #fff;
+  width: 90%;
+  height: 11vh;
+  margin: 20px;
+  padding: 0.5rem;  
+}
+.text-1{
+  background-color: #2193f3;
+}
+.text-2{
+  background-color: #eb4657;
+}
+.text-3{
+  background-color: #eab614;
+}
+.cards .grid-x .imagenes-z a{
+  color: inherit;
+  text-decoration: none;
+}

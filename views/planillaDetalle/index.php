@@ -1,6 +1,15 @@
-<?php require ('views/header.php'); ?>
+<?php require ('views/headerSesion.php'); ?>
 <link rel="stylesheet" href="<?php echo constant('URL') . 'public/css/planilla.css' ?>">
-
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="callout text-center">
+            <h2 id="title-modal"></h2>
+            <img src="" alt="modal-img" class="img-modal" id="img-modal">
+            <p id="text-modal">Contenido de la ventana modal aquí</p>
+            <button class="close-modal">Cerrar</button>
+        </div>
+    </div>
+</div>
 <div class="grid-container full margin-horizontal-1">
     <div class="grid-x margin-vertical-2">
         <div class="cell">
@@ -35,8 +44,7 @@
 
         </div>
         <div class="cell">
-            <form action="<?php echo constant('URL') . 'planillaDetalle/update' ?>" method="POST"
-                class="grid-x large-up-2 grid-margin-x">
+            <form method="POST" class="grid-x large-up-2 grid-margin-x" id="planillaForm">
                 <div class="cell callout">
                     <div class="grid-x">
                         <div class="cell">
@@ -167,10 +175,10 @@
                                 <input type="text" name="idpersonal" value="<?php echo $_SESSION['idper']; ?>"
                                     id="idpersonal" placeholder="00.0" hidden>
                                 <input type="text" name="id" value="" id="id" placeholder="00.0" hidden>
-                                <div class="cell small-3"><button type="submit" class="button success">Guardar</button>
+                                <div class="cell small-3"><button type="submit" class="button success">Actualizar</button>
                                 </div>
-                                <div class="cell small-3"><button class="button warning">Editar</button></div>
-                                <div class="cell small-3"><button class="button alert">SALIR</button></div>
+                                <div class="cell small-3"><a href="<?php echo constant('URL')?>main/render" class="button warning">Ir a Menu</a></div>
+                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/inicio" class="button alert">SALIR</a></div>
                             </div>
                         </div>
                     </div>
