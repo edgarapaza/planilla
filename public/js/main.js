@@ -69,6 +69,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         <td>${element.fecha_final}</td>
                         <td>
                         <a href="http://localhost/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
+                        <a href="http://localhost/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
                         </td>
                         <td>
                         <a href="#" class="button success">Planilla</a>

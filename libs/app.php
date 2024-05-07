@@ -58,17 +58,34 @@ class App
     } else {
       #echo "No se ha logueado";
 
+      // if (empty($url[0])) {
+      //   #echo "URL vacia";
+      //   $archivoController = "controller/login.php";
+      //   require_once $archivoController;
+      //   $controller = new Login;
+      //   $controller->loadModel('main');
+      //   $controller->render();
+      //   return false;
+      // }
+
+      // ZETA CAMBIO----------------para que redireccione a inicio====
       if (empty($url[0])) {
         #echo "URL vacia";
-        $archivoController = "controller/login.php";
+        $archivoController = "controller/inicio.php";
         require_once $archivoController;
-        $controller = new Login;
+        $controller = new Inicio;
         $controller->loadModel('main');
         $controller->render();
         return false;
       }
-
-
+      if (isset($url[1]) && $url[1] == "login") {
+        $archivoController = "controller/login.php";
+        require_once $archivoController;
+        $controller = new Login;
+        $controller->loadModel('login');
+        $controller->render();
+      }
+      // ZETA CAMBIO-END---------------
       #echo "Segundo: ".$url[1];
       if (isset($url[1]) && $url[1] == "user") {
 

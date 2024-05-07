@@ -12,6 +12,10 @@ class Main extends Controller
 	{
 		$this->view->Render('main/index');
 	}
+	function inicio()
+	{
+		$this->view->Render('main/inicio');
+	}
 	public function renderPlanilla($param = null){
 		$id = $param[0];
 		$data = $this->model->GetPlanilla($id);
