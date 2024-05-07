@@ -4,9 +4,9 @@ define('URL', 'http://localhost/planilla/');
 
 define('COMPANY', 'Planillas - DRTC');
 define('HOST', 'localhost');
-define('USER', 'jersson');
+define('USER', 'usuario');
 define('DB', 'mtc');
-define('PASSWORD', 'jersson');
+define('PASSWORD', 'archivo123$');
 define('CHATSET', 'utf8');
 
 date_default_timezone_set('America/Lima');
