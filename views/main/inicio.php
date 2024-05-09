@@ -23,7 +23,7 @@
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch1" class="input-zeta">
           </div>
-          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+          <span class="clear" onclick="document.getElementById('mysearch1').value = ''"></span>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch2" class="input-zeta">
           </div>
-          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+          <span class="clear" onclick="document.getElementById('mysearch2').value = ''"></span>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch3" class="input-zeta">
           </div>
-          <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span>
+          <span class="clear" onclick="document.getElementById('mysearch3').value = ''"></span>
         </div>
       </div>
     </div>

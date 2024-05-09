@@ -22,4 +22,11 @@ class Buscar
 		$data = $this->conn->ConsultaCon($sql);
 		return $data;
 	}
+
+	function buscarxId($id)
+	{
+		$sql ="SELECT nombres, ap, am FROM mtc.planilla WHERE id = $id;";
+		$data = $this->conn->ConsultaArray($sql);
+		return $data;
+	}
 }

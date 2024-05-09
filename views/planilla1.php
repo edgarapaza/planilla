@@ -1,12 +1,15 @@
 <?php
 require_once 'fpdf.php';
-require_once '../model/buscar.php';
+require_once '../models/buscar.php';
 
 $buscar = new Buscar();
 
-$nombre = 'HERMOGENES M.';
-$ap = 'QUILCA';
-$am = 'MORALES';
+$id = $_GET['id'];
+
+$persona = $buscar->buscarxId($id);
+$nombre = $persona['nombres'];
+$ap = $persona['ap'];
+$am = $persona['am'];
 
 $sql = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE nombres = '$nombre' and ap = '$ap' and am = '$am' group by year(spdat1);";
 $dataa = $buscar->AniosTrabajados($sql);
@@ -156,7 +159,11 @@ $pdf->AliasNbPages();
 $pdf->SetFont('Arial', 'B', 9);
 $pdf->AddPage();
 
-
+/* Agregando nombre*/
+$pdf->SetXY(30,21);
+$pdf->Cell(0, 10, $nombre." ".$ap." ".$am, 0, 1, 'L');
+$pdf->SetXY(30,27);
+$pdf->Cell(0, 10, $fechainicio[0] . " HASTA ". $fechafinal[count($fechafinal)-1] , 0, 1, 'L');
 #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
 $header = array('Desde', 'Hasta', 'TOT DIA','CARGO', 'BASICA','REUNIFICADA','D.S.276','OTROS', 'TOTAL REMU','20530','19990','AFP','IPSS','FONAVI');
 // Colors, line width and bold font
