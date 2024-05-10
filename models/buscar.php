@@ -1,5 +1,5 @@
 <?php
-require_once '../libs/Conexion.php';
+require_once 'Conexion.php';
 
 class Buscar
 {

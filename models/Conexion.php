@@ -5,12 +5,13 @@ class Conexion
 
   function __construct()
   {
-    $host = "localhost";
-    $user = "usuario";
-    $pass = "archivo123$";
-    $db   = "mtc";
+    $host = "127.0.0.1";
+    $port = "33070";
+    $user = "root";
+    $pass = "zeta";
+    $db = "mtc";
 
-    $this->conn = new mysqli($host, $user, $pass, $db);
+    $this->conn = new mysqli($host, $user, $pass, $db, $port);
 
     if ($this->conn->connect_errno) {
       echo "Error al contenctar a MySQL: (" . $this->conn->connect_errno . ") " . $this->conn->connect_error;
