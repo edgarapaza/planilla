@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="<?php echo constant('URL') . 'public/css/foundation-prototype.css' ?>">
 
   <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/footer.css">
-
+  <!-- ICONOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <script src="<?php echo constant('URL'); ?>public/js/jquery.js"></script>
 
 

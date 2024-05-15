@@ -146,7 +146,7 @@
 
                             <div class="cell small-3"><button type="submit" class="button success">GUARDAR TODO</button>
                             </div>
-                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/render" class="button warning">Menu</a></div>
+                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/render" class="button warning">Ir a Menu</a></div>
                             <div class="cell small-3"><a href="<?php echo constant('URL')?>main/inicio" class="button alert">Planillas</a></div>
                         </div>
                     </div>

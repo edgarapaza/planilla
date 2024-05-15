@@ -1,49 +1,49 @@
 <footer class="marketing-site-footer">
   <div class="row medium-unstack">
     <div class="medium-4 columns">
-      <h4 class="marketing-site-footer-name">Yeti Snowcone</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita dolorem accusantium architecto id quidem, itaque nesciunt quam ducimus atque.</p>
+      <h4 class="marketing-site-footer-name">Nosotros</h4>
+      <p>Brindamos precios justos y accesibñes, dependiendo de nuestros planes web. Contamos con personal 100% profesional, capacitado y calificado, expertos en Diseño Web, profesionales.</p>
       <ul class="menu marketing-site-footer-menu-social simple">
-        <li><a href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
-         <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-         <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
       </ul>
     </div>
     <div class="medium-4 columns">
-       <h4 class="marketing-site-footer-title">Contact Info</h4>
+      <h4 class="marketing-site-footer-title">Contacto Info</h4>
       <div class="marketing-site-footer-block">
         <i class="fa fa-map-marker" aria-hidden="true"></i>
-        <p>100 W Rincon<br>San Francisco, CA 94015</p>
+        <p>Puno <br>Puno, Peru 94015</p>
       </div>
       <div class="marketing-site-footer-block">
         <i class="fa fa-phone" aria-hidden="true"></i>
-        <p>1 (800) 555-5555</p>
+        <p>+51 935 017 466</p>
       </div>
       <div class="marketing-site-footer-block">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
-        <p>yetirules@fakeemail.com</p>
+        <p>edgarapaza@gmail.com</p>
       </div>
     </div>
     <div class="medium-4 columns">
       <h4 class="marketing-site-footer-title">Instagram</h4>
       <div class="row small-up-3">
         <div class="column column-block">
-          <img src="https://placehold.it/75" alt="" />
+          <img src="<?php echo constant('URL') ?>public/img/katariwhite.png" alt="katari" />
         </div>
         <div class="column column-block">
-          <img src="https://placehold.it/75" alt="" />
+          <img src="<?php echo constant('URL') ?>public/img/katariwhite.png" alt="katari" />
         </div>
         <div class="column column-block">
-          <img src="https://placehold.it/75" alt="" />
+          <img src="<?php echo constant('URL') ?>public/img/katariwhite.png" alt="katari" />
         </div>
         <div class="column column-block">
-          <img src="https://placehold.it/75" alt="" />
+          <img src="<?php echo constant('URL') ?>public/img/katariwhite.png" alt="katari" />
         </div>
         <div class="column column-block">
-          <img src="https://placehold.it/75" alt="" />
+          <img src="<?php echo constant('URL') ?>public/img/katariwhite.png" alt="katari" />
         </div>
         <div class="column column-block">
-          <img src="https://placehold.it/75" alt="" />
+          <img src="<?php echo constant('URL') ?>public/img/katariwhite.png" alt="katari" />
         </div>
       </div>
     </div>
@@ -51,28 +51,25 @@
   <div class="marketing-site-footer-bottom">
     <div class="row large-unstack align-middle">
       <div class="column">
-        <p>&copy; 2017 No rights reserved</p>
+        <small class="copyright">
+          <span class=""> ©
+            KATARI SOFTWARE
+          </span>
+          Copyrigth Katari. Inc.</small>
+        <small class="copyright">Todos los derechos reservados.</small>
       </div>
-      <div class="column">
-        <ul class="menu marketing-site-footer-bottom-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Works</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
+
     </div>
   </div>
 </footer>
 
 
-    <script src="<?php echo constant('URL'); ?>public/js/buscar.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-    <script>
-      $(document).foundation();
-    </script>
-  </body>
+<script src="<?php echo constant('URL'); ?>public/js/buscar.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+  $(document).foundation();
+</script>
+</body>
+
 </html>

@@ -189,7 +189,7 @@
     </div>
     <div class="grid-x">
     <div class="cell large-12">
-      <h4>Registros</h4>
+      <h4>Registros de todas sus planillas</h4>
       <table>
         <thead>
           <tr>

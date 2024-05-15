@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="<?php echo constant('URL') . 'public/css/foundation-float.css' ?>">
     <!-- Foundation prototipe-algunas interesantes opciones a utilizar-->
     <link rel="stylesheet" href="<?php echo constant('URL') . 'public/css/foundation-prototype.css' ?>">
+      <!-- ICONOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/footer.css">
 
