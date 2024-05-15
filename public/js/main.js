@@ -30,8 +30,8 @@ function table() {
                     <a href="http://localhost/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
                     </td>
                     <td>
-                    <a href="http://localhost/planilla/views/planilla1.php?id=${element.id}" class="button success" target="_blank">Planilla</a>
-                    <a href="#" class="button success">FONAVI</a>
+                    <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+                    <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
                     <a href="#" class="button success">Liquidacion</a>
                     </td>
                 </tr>`;

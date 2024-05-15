@@ -14,8 +14,8 @@
 const icons = document.querySelectorAll(".icon");
 const searches = document.querySelectorAll(".search");
 
-icons.forEach((icon, index) => {
-  icon.onclick = function() {
-    searches[index].classList.toggle("active");
-  };
-});
+  // icons.forEach((icon, index) => {
+  //   icon.onclick = function() {
+  //     searches[index].classList.toggle("active");
+  //   };
+  // });

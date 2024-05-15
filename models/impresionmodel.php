@@ -1,13 +1,9 @@
 <?php
-require_once 'Conexion.php';
-
-class Buscar
+class ImpresionModel extends Model
 {
-	public $conn;
 	function __construct()
 	{
-		$this->conn = new Conexion();
-		return $this->conn;
+		parent::__construct();
 	}
 
 	function AniosTrabajados($sql)

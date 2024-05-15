@@ -13,5 +13,11 @@ class LoginModel extends Model
     $res = $this->conn->ConsultaArray($sql);
     return $res;
   }
+  function ValidarUsuario($username)
+  {
+    $sql = "SELECT l.idpersonal,l.usuario, l.passwd, (SELECT concat(p.nombre,' ',p.apellido) FROM mtc.personal as p WHERE p.idpersonal = l.idpersonal) as personal,l.nivusu,l.chkusu FROM login as l WHERE l.usuario = '$username' LIMIT 1;";
+    $res = $this->conn->ConsultaArray($sql);
+    return $res;
+  }
 
 }

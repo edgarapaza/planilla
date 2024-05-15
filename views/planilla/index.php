@@ -8,6 +8,7 @@
             <h2 id="title-modal"></h2>
             <img src="" alt="modal-img" class="img-modal" id="img-modal">
             <p id="text-modal">Contenido de la ventana modal aquí</p>
+            <a href="<?php echo constant('URL') . 'impresion/pdf/' . @$this->data['id']?>" class="pdf" id="pdf" target="_blank" style="display: none;">pdf</a>
             <button class="close-modal">Cerrar</button>
         </div>
     </div>
@@ -142,10 +143,11 @@
                         <div class="grid-x align-spaced">
                             <input type="text" name="idpersonal" value="<?php echo $_SESSION['idper']; ?>"
                                 id="idpersonal" placeholder="00.0" hidden>
+
                             <div class="cell small-3"><button type="submit" class="button success">GUARDAR TODO</button>
                             </div>
                             <div class="cell small-3"><a href="<?php echo constant('URL')?>main/render" class="button warning">Menu</a></div>
-                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/inicio" class="button alert">SALIR</a></div>
+                            <div class="cell small-3"><a href="<?php echo constant('URL')?>main/inicio" class="button alert">Planillas</a></div>
                         </div>
                     </div>
                 </div>

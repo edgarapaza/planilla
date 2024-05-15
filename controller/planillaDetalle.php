@@ -63,7 +63,7 @@ class PlanillaDetalle extends Controller
         $id = $_POST['id'];
 
         # Se valida usando el metodo validar->Devuelve TRUE si la validacion es correcta
-        if ($this->validacionDatos(nombre: $nombres, apellido: $apellidopa, numero: $idpersonal, fecha: $fechaI) && $this->validacionDatos(apellido: $apellidoma, fecha: $fechaF, descripcion: $cargo)) {
+        if ($this->validacionDatos(numero: $idpersonal, fecha: $fechaI) && $this->validacionDatos(fecha: $fechaF, descripcion: $cargo)) {
             # Se hace la insercion
             $res = $this->model->Update($id, $condicion, $nombres, $apellidopa, $apellidoma, $fechaI, $fechaF, $cargo, $rembasica, $remunifi, $ds276, $remotros, $ley19990, $ley20530, $afp, $ipss, $fonavi, $moneda, $trabajador, $muc, $vet, $idpersonal);
             # Se verifica si la insercion fue exitosa

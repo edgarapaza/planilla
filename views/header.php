@@ -23,39 +23,6 @@
 </head>
 
 <body>
-  <!-- <div class="top-bar" id="realEstateMenu">
-    <div class="top-bar-left">
-      <ul class="dropdown menu" data-dropdown-menu>
-        <li class="menu-text"><span><?php echo constant('COMPANY'); ?></span></li>
-        <li><a href="#">Ingresar planilla</a>
-          <ul class="menu vertical">
-            <li><a href="<?php echo constant('URL') . 'planilla' ?>">Nueva planilla</a></li>
-            <li><a href="#">Editar Planilla</a></li>
-            <li><a href="#">Listar Planilla</a></li>
-            <li><a href="#">Imprimir Planilla</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="top-bar-right">
-      <ul class="dropdown menu" data-dropdown-menu>
-        <li>
-          <a href="#">Usuario: <?php echo $_SESSION['katari']; ?></a>
-          <ul class="menu vertical">
-            <li><a href="#">Configuración</a></li>
-            <li><a href="#">Cambiar Contraseña</a></li>
-            <li>
-              <hr>
-            </li>
-            <li><a href="<?php echo constant('URL'); ?>salir">Salir</a></li>
-          </ul>
-
-        </li>
-
-        <li><a href="<?php echo constant('URL'); ?>salir" class="button">Salir</a></li>
-      </ul>
-    </div>
-  </div> -->
   <div class="grid-x header-z">
     <div class="cell large-3">
       <div class="img-t">

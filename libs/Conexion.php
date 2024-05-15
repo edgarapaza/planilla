@@ -9,8 +9,8 @@ class Conexion
     $user = constant('USER');
     $pass = constant('PASSWORD');
     $db   = constant('DB');
-
-    $this->conn = new mysqli($host, $user, $pass, $db);
+    // QUITAR EL PUERTO SI ES NECESARIO
+    $this->conn = new mysqli($host, $user, $pass, $db,"33070");
 
     if ($this->conn->connect_errno) {
       echo "Error al contenctar a MySQL: (" . $this->conn->connect_errno . ") " . $this->conn->connect_error;

@@ -6,7 +6,7 @@
     <div class="cell">
       <h5>Busqueda por nombres</h5>
       <div class="search-zeta">
-        <div class="search" id="search">
+        <div class="search active" id="search">
           <div class="icon" id="icon"></div>
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch" class="input-zeta">
@@ -18,7 +18,7 @@
     <div class="cell">
       <h5>Busqueda por apellido paterno</h5>
       <div class="search-zeta">
-        <div class="search" id="search">
+        <div class="search active" id="search">
           <div class="icon" id="icon"></div>
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch1" class="input-zeta">
@@ -30,7 +30,7 @@
     <div class="cell">
       <h5>Busqueda por apellido materno</h5>
       <div class="search-zeta">
-        <div class="search" id="search">
+        <div class="search active" id="search">
           <div class="icon" id="icon"></div>
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch2" class="input-zeta">
@@ -42,7 +42,7 @@
     <div class="cell">
       <h5>Busqueda por cargo</h5>
       <div class="search-zeta">
-        <div class="search" id="search">
+        <div class="search active" id="search">
           <div class="icon" id="icon"></div>
           <div class="input">
             <input type="text" placeholder="Search" id="mysearch3" class="input-zeta">
