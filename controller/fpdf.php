@@ -1936,7 +1936,7 @@ class PDF extends FPDF
 {
     function Header()
     {
-        // Logo
+        // Logo CAMBIAR RUTA PARA PRODUCCION
         $this->Image('http://localhost/planilla/public/img/logo.png',10,6,30);
         // Arial bold 15
         $this->SetFont('Arial','B',10);
