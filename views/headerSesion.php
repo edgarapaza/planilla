@@ -56,7 +56,7 @@
                     <p class="name-z">Bienvenido: <?php echo $_SESSION['katari']; ?></p>
                 </div>
                 <div class="cell large-4 text-center">
-                    <a href="<?php echo constant('URL'); ?>salir" class="button salir">SALIR</a>
+                    <a href="<?php echo constant('URL'); ?>login/salir" class="button salir">SALIR</a>
                 </div>
             </div>
         </div>

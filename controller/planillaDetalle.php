@@ -52,7 +52,7 @@ class PlanillaDetalle extends Controller
         $vet = $_POST['vet'] == '' ? 0 : $_POST['vet'];
         $rembasica = $_POST['remBasica'] == '' ? 0 : $_POST['remBasica'];
         $remunifi = $_POST['remReunificada'] == '' ? 0 : $_POST['remReunificada'];
-        $ds276 = $_POST['deSupremo'] == '' ? 0 : $_POST['deSupremo'];
+        $ds276 = $_POST['desupremo'] == '' ? 0 : $_POST['desupremo'];
         $remotros = $_POST['otros'] == '' ? 0 : $_POST['otros'];
         $ley19990 = $_POST['ley19990'] == '' ? 0 : $_POST['ley19990'];
         $ley20530 = $_POST['ley20530'] == '' ? 0 : $_POST['ley20530'];

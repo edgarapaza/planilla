@@ -19,5 +19,17 @@ class LoginModel extends Model
     $res = $this->conn->ConsultaArray($sql);
     return $res;
   }
+  public function bitacora($idpersonal, $fecha, $hora, $tipo,$ip){
+    $sql ="INSERT INTO `mtc`.`bitacora` (`idpersonal`, `fecha`, `hora`, `tipo`,`ip`) VALUES ('$idpersonal', '$fecha', '$hora', '$tipo','$ip');";
+    $res = $this->conn->ConsultaSin($sql);
+    return $res;
+  }
+  public function bitacoraSalir($idpersonal, $hora, $fecha){
+    $sql ="UPDATE `mtc`.`bitacora` SET `horasalida` = '$hora', `tiempo` = TIMESTAMPDIFF(MINUTE,hora,horasalida) WHERE `idpersonal` = '$idpersonal' and fecha = '$fecha';
+    ";
+    $res = $this->conn->ConsultaSin($sql);
+    return $res;
+  }
+  
 
 }

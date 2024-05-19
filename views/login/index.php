@@ -23,6 +23,18 @@
         <span class=""> ©
           <script>
             document.write(new Date().getFullYear())
+
+            //OBTENCION DE IP CON JAVASCRIPT PRUEBA
+            // $.getJSON('https://api.ipify.org?format=json', function (data) {
+            //   console.log(data.ip);
+            // });
+            // $.getJSON("http://ip-api.com/json/?callback=?", function (data) {
+            //   console.log(data);
+            //   $('#IP_Address').append("Your IP: " + data.query);
+            //   $('#Country').append("Your Country: " + data.country);
+            //   $('#City').append("Your City: " + data.city);
+            // });
+            // //OBTENCION DE IP CON JAVASCRIPT PRUEBA END
           </script>2024 KATARI SOFTWARE
         </span>
         Copyrigth Katari. Inc.

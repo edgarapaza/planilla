@@ -1,3 +1,39 @@
+var host = "localhost";
+// SUMA Y RESTA DE LOS CAMPOS 
+$("#totalRemu").on("input", function () {
+  // OBTENEMOS LA FECHA SELECCIONADA CONVERTIDA A DATE
+  var fechaSeleccionada = new Date($("#fechaI").val());
+  // DECLARAMOS LA FECHA, ANTES DE ESTA FECHA SE HACE LA RESTA SI NO NO HACE NADA
+  var fechaParaRestar = new Date("2020-07-29");
+  if (fechaSeleccionada < fechaParaRestar) {
+     var result = parseFloat($('#totalRemu').val()) - parseFloat($('#remBasica').val());
+     var resultado = isNaN(result) ? 0 : result;
+     $('#otros').val(resultado);
+  }
+}); 
+$("#remBasica, #remReunificada, #desupremo, #otros").on("input", function () {
+  // OBTENEMOS LA FECHA SELECCIONADA CONVERTIDA A DATE
+  var fechaSeleccionada = new Date($("#fechaI").val());
+  // DECLARAMOS LA FECHA, ANTES DE ESTA FECHA SE HACE LA RESTA SI NO NO HACE NADA
+  var fechaParaRestar = new Date("2020-07-29");
+  if (fechaSeleccionada > fechaParaRestar) {
+    var remBasica = parseFloat($('#remBasica').val());
+    var remReunificada = parseFloat($('#remReunificada').val());
+    var deSupremo = parseFloat($('#desupremo').val());
+    var otros = parseFloat($('#otros').val());
+    var result = remBasica + remReunificada + deSupremo + otros;
+     var resultado = isNaN(result) ? 0 : result;
+     $('#totalRemu').val(resultado);
+  }
+});
+// SUMA Y RESTA DE LOS CAMPOS END
+// Reemplaza caracteres no numericos a flotantes
+$("#muc,#vet,#remBasica, #remReunificada, #desupremo, #otros, #totalRemu,#ley19990, #ley20530, #afp, #ipss, #fonavi").on("input", function () {
+  $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+});
+// Reemplaza caracteres no numericos a flotantes END
+
+
 // SE DEBE PRESIONAR ENTER PARA CAPTAR EL EVENTO CON JAVASCRIPT
 $("#mes, #anio").change(function () {
   var mes = $("#mes").val();
@@ -7,7 +43,7 @@ $("#mes, #anio").change(function () {
   var am = $("#apellidom").val();
   $.ajax({
     type: "POST",
-    url: "http://localhost/planilla/planillaDetalle/getPlanilla",
+    url: `http://${host}/planilla/planillaDetalle/getPlanilla`,
     data: { nombres, ap, am, mes, anio },
     success: function (response) {
       try {
@@ -22,7 +58,7 @@ $("#mes, #anio").change(function () {
           $("#vet").val(data.vet || "");
           $("#remBasica").val(data.rembasica || "");
           $("#remReunificada").val(data.remunifi || "");
-          $("#deSupremo").val(data.ds276 || "");
+          $("#desupremo").val(data.ds276 || "");
           $("#otros").val(data.remotros || "");
           $("#ley19990").val(data.ley19990 || "");
           $("#ley20530").val(data.ley20530 || "");
@@ -34,12 +70,12 @@ $("#mes, #anio").change(function () {
         } else {
           // Si no hay datos en la respuesta, vaciar los inputs
           $(
-            "#cargo, #fechaI, #fechaF, #condicion, #moneda, #muc, #vet, #remBasica, #remReunificada, #deSupremo, #otros, #ley19990, #ley20530, #afp, #ipss, #fonavi, #trabajador, #id"
+            "#cargo, #fechaI, #fechaF, #condicion, #moneda, #muc, #vet, #remBasica, #remReunificada, #desupremo, #otros, #ley19990, #ley20530, #afp, #ipss, #fonavi, #trabajador, #id"
           ).val("");
         }
       } catch (error) {
         $(
-          "#cargo, #fechaI, #fechaF, #condicion, #moneda, #muc, #vet, #remBasica, #remReunificada, #deSupremo, #otros, #ley19990, #ley20530, #afp, #ipss, #fonavi, #trabajador, #id"
+          "#cargo, #fechaI, #fechaF, #condicion, #moneda, #muc, #vet, #remBasica, #remReunificada, #desupremo, #otros, #ley19990, #ley20530, #afp, #ipss, #fonavi, #trabajador, #id"
         ).val("");
         //console.error("Error al analizar la respuesta JSON:", error);
       }
@@ -56,7 +92,7 @@ function table() {
   var am = $("#apellidom").val();
   $.ajax({
     type: "POST",
-    url: "http://localhost/planilla/planillaDetalle/getAllPlanilla",
+    url: `http://${host}/planilla/planillaDetalle/getAllPlanilla`,
     data: { nombres, ap, am },
     success: function (response) {
       console.log(response);
@@ -71,13 +107,12 @@ function table() {
                     <td>${element.fecha_inicial}</td>
                     <td>${element.fecha_final}</td>
                     <td>
-                    <a href="http://localhost/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
-                    <a href="http://localhost/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
+                    <a href="http://${host}/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
+                    <a href="http://${host}/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
                     </td>
                     <td>
-                    <a href="#" class="button success">Planilla</a>
+                    <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
                     <a href="#" class="button success">FONAVI</a>
-                    <a href="#" class="button success">Liquidacion</a>
                     </td>
                 </tr>`;
       });
@@ -96,7 +131,7 @@ $("#planillaForm").submit(function (event) {
   var formData = $(this).serialize(); // Serializar datos del formulario
   $.ajax({
     type: "POST",
-    url: "http://localhost/planilla/planillaDetalle/update",
+    url: "http://${host}/planilla/planillaDetalle/update",
     data: formData,
     success: function (response) {
       // Respuesta del servidor
@@ -109,7 +144,7 @@ $("#planillaForm").submit(function (event) {
         );
         $("#img-modal").attr(
           "src",
-          "http://localhost/planilla/public/img/falla.png"
+          `http://${host}/planilla/public/img/falla.png`
         );
         //mensaje modal END
         $(".modal-overlay").fadeIn();
@@ -119,7 +154,7 @@ $("#planillaForm").submit(function (event) {
         $("#text-modal").text("Planilla registrada con exito");
         $("#img-modal").attr(
           "src",
-          "http://localhost/planilla/public/img/mujer-de-negocios.png"
+          `http://${host}/planilla/public/img/mujer-de-negocios.png`
         );
         // Seleccionar el enlace por su clase
         var pdfLink = document.querySelector(".pdf");
@@ -133,7 +168,7 @@ $("#planillaForm").submit(function (event) {
         $("#vet").val("");
         $("#remBasica").val("");
         $("#remReunificada").val("");
-        $("#deSupremo").val("");
+        $("#desupremo").val("");
         $("#otros").val("");
         $("#ley19990").val("");
         $("#ley20530").val("");

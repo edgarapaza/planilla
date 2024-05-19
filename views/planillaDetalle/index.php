@@ -129,7 +129,7 @@
                             </span>
                             <span>
                                 <label for="desupremo" class="large-4">D. supremo 276 :</label>
-                                <input type="text" name="deSupremo" id="deSupremo" placeholder="0.00">
+                                <input type="text" name="desupremo" id="desupremo" placeholder="0.00">
                             </span>
                             <span>
                                 <label for="otros" class="large-4">Otros :</label>
@@ -199,7 +199,7 @@
             <th>Fecha Inicio</th>
             <th>Fecha Final</th>
             <th>Ingreso</th>
-            <th>Impresion</th>
+            <th colspan="2">Impresion</th>
           </tr>
         </thead>
         <tbody id="datos">
@@ -216,7 +216,6 @@
             <td>
               <a href="#" class="button success">Planilla</a>
               <a href="#" class="button success">FONAVI</a>
-              <a href="#" class="button success">Liquidacion</a>
             </td>
           </tr>
         </tbody>

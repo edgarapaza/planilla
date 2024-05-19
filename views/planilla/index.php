@@ -97,11 +97,15 @@
                         </span>
                         <span>
                             <label for="desupremo" class="large-4">D. supremo 276 :</label>
-                            <input type="text" name="deSupremo" id="desupremo" placeholder="0.00">
+                            <input type="text" name="desupremo" id="desupremo" placeholder="0.00">
                         </span>
                         <span>
                             <label for="otros" class="large-4">Otros :</label>
                             <input type="text" name="otros" id="otros" placeholder="0.00">
+                        </span>
+                        <span id="total">
+                            <label for="totalRemu" class="large-4">Total Remu :</label>
+                            <input type="text" name="total" id="totalRemu" placeholder="0.00">
                         </span>
                     </div>
                 </div>

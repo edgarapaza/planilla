@@ -55,7 +55,7 @@ class Impresion extends Controller
         $pdf->SetXY(30, 27);
         $pdf->Cell(0, 10, $fechainicio[0] . " HASTA " . $fechafinal[count($fechafinal) - 1], 0, 1, 'L');
         #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
-        $header = array('Desde', 'Hasta', 'TOT DIA', 'CARGO', 'BASICA', 'REUNIFICADA', 'D.S.276', 'OTROS', 'TOTAL REMU', '20530', '19990', 'AFP', 'IPSS', 'FONAVI');
+        $header = array('Desde', 'Hasta', 'TOT DIA', 'CARGO', 'BASICA','MUC','VET', 'REUNIFICADA', 'D.S.276', 'OTROS', 'TOTAL REMU', '20530', '19990', 'AFP', 'IPSS', 'FONAVI');
         // Colors, line width and bold font
         $pdf->SetFillColor(200, 100, 100);
         $pdf->SetTextColor(255);
@@ -95,8 +95,10 @@ class Impresion extends Controller
                 #echo $diff->days . ' dias';
 
                 $pdf->Cell(10, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
-                $pdf->Cell(50, 6, $row['cargo'], 'LR', 0, 'L', $fill);
+                $pdf->Cell(45, 6, $row['cargo'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(15, 6, number_format($row['rembasica']), 'LR', 0, 'R', $fill);
+                $pdf->Cell(15, 6, number_format($row['muc']), 'LR', 0, 'R', $fill);
+                $pdf->Cell(15, 6, number_format($row['vet']), 'LR', 0, 'R', $fill);
                 $pdf->Cell(15, 6, number_format($row['remunifi']), 'LR', 0, 'R', $fill);
                 $pdf->Cell(15, 6, number_format($row['ds276']), 'LR', 0, 'R', $fill);
                 $pdf->Cell(15, 6, number_format($row['remotros']), 'LR', 0, 'R', $fill);

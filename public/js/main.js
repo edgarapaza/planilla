@@ -1,3 +1,4 @@
+var host = "localhost";
 //console.log("funciona!!!");
 // agregar editar-> debe tener un filtro por fecha
 // al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
@@ -11,7 +12,7 @@ function table() {
   var fin = inicio + registrosPorPagina;
   $.ajax({
     type: "GET",
-    url: "http://localhost/planilla/main/read",
+    url: `http://${host}/planilla/main/read`,
     success: function (response) {
       //console.log(response);
       let datas = JSON.parse(response);
@@ -26,13 +27,12 @@ function table() {
                     <td>${element.fecha_inicial}</td>
                     <td>${element.fecha_final}</td>
                     <td>
-                    <a href="http://localhost/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
-                    <a href="http://localhost/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
+                    <a href="http://${host}/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
+                    <a href="http://${host}/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
                     </td>
                     <td>
-                    <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
-                    <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
-                    <a href="#" class="button success">Liquidacion</a>
+                    <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+                    <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
                     </td>
                 </tr>`;
       });
@@ -53,7 +53,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
   var cargo = $("#mysearch3").val();
   $.ajax({
     type: "POST",
-    url: "http://localhost/planilla/main/search",
+    url: `http://${host}/planilla/main/search`,
     data: { nombres, ap, am, cargo },
     success: function (response) {
       console.log(response);
@@ -68,13 +68,12 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         <td>${element.fecha_inicial}</td>
                         <td>${element.fecha_final}</td>
                         <td>
-                        <a href="http://localhost/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
-                        <a href="http://localhost/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
+                        <a href="http://${host}/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
+                        <a href="http://${host}/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
                         </td>
                         <td>
-                        <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
-                        <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
-                        <a href="http://localhost/planilla/impresion/pdf/${element.id}" class="button success">Liquidacion</a>
+                        <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+                        <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
                         </td>
                     </tr>`;
       });

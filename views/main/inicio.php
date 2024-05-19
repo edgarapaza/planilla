@@ -54,17 +54,20 @@
   </div>
   <div class="grid-x">
     <div class="cell large-12">
+      <div class="cell">
       <h4>Registros</h4>
-      <table>
+      <a href="<?php echo constant('URL')?>planilla" class="button success">Nueva Planilla</a>
+      </div>
+      <table class="text-center">
         <thead>
           <tr>
-            <th>Num</th>
-            <th>Nombre y apellidos</th>
-            <th>Cargo</th>
+            <th class="text-center">Num</th>
+            <th class="text-center">Nombre y apellidos</th>
+            <th class="text-center">Cargo</th>
             <th>Fecha Inicio</th>
             <th>Fecha Final</th>
-            <th>Ingreso</th>
-            <th>Impresion</th>
+            <th class="text-center">Ingreso</th>
+            <th class="text-center" colspan="2">Impresion</th>
           </tr>
         </thead>
         <tbody id="datos">
@@ -81,7 +84,6 @@
             <td>
               <a href="#" class="button success">Planilla</a>
               <a href="#" class="button success">FONAVI</a>
-              <a href="#" class="button success">Liquidacion</a>
             </td>
           </tr>
         </tbody>
