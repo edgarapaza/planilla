@@ -33,7 +33,6 @@ class Main extends Controller
 				'fecha_inicial' => $row['fecha_inicial'],
 				'fecha_final' => $row['fecha_final'],
 			);
-			
 		}
 		echo json_encode($json);
 	}
@@ -51,10 +50,8 @@ class Main extends Controller
 				'cargo' => $row['cargo'],
 				'fecha_inicial' => $row['fecha_inicial'],
 				'fecha_final' => $row['fecha_final'],
-			);
-			
+			);	
 		}
-		
 		echo json_encode($json);
 	}	
 }

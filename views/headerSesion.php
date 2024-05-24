@@ -33,19 +33,9 @@
         </div>
         <div class="cell large-6">
             <div class="grid-x margin-top-1">
-                <div class="cell large-4 text-center">
-                    <p class="lead">
-                        Servicios Prestados
-                    </p>
-                </div>
-                <div class="cell large-4 text-center">
-                    <p class="lead">
-                        Aportaciones Fonavi
-                    </p>
-                </div>
-                <div class="cell large-4 text-center">
-                    <p class="lead">
-                        Liquidaciones
+                <div class="cell large-12 text-center">
+                    <p class="lead shadow">
+                        Este sistema permite registro, impresion de planillas y fonavi
                     </p>
                 </div>
             </div>

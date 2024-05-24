@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
 /*******************************************************************************
 * FPDF                                                                         *
 *                                                                              *
@@ -6,7 +7,6 @@
 * Date:    2023-06-25                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
-
 class FPDF
 {
 const VERSION = '1.86';
@@ -1936,7 +1936,7 @@ class PDF extends FPDF
 {
     function Header()
     {
-        // Logo CAMBIAR RUTA PARA PRODUCCION
+        // Logo
         $this->Image('http://localhost/planilla/public/img/logo.png',10,6,30);
         // Arial bold 15
         $this->SetFont('Arial','B',10);
@@ -2041,4 +2041,173 @@ class PDF extends FPDF
         $this->Cell(array_sum($w), 0, '', 'T');
     }
 }
+class Fonavi extends FPDF
+{
+    public $nombre;
+    public $ap;
+    public $am;
+
+    function Header()
+    {
+        // Logo
+        $this->Image('http://localhost/planilla/public/img/logo.png',15,5,30);
+        // Arial bold 15
+        $this->SetFont('Arial','B',9);
+        // Move to the right
+        // Title
+        $this->Cell(180, 7, 'DIRECCION REGIONAL DE TRANSPORTES, COMUNICACIONES, VIVIENDA Y CONSTRUCCION -  PUNO', 0, 1, 'C');
+        $this->Cell(180, 5, 'CONSTANCIA CERTIFICADA DE PAGOS DE APORTACIONES AL FONAVI', 0, 1, 'C');
+        $this->Ln();
+        $this->Cell(20, 1, "DON(ÑA):". $this->getNombre(), 0, 1, 'L');
+        $this->Cell(20, 10, 'FECHA: ', 0, 1, 'L');
+
+    }
+
+    // Page footer
+    function Footer()
+    {
+        // Position at 1.5 cm from bottom
+        $this->SetY(-15);
+        // Arial italic 8
+        $this->SetFont('Arial','I',8);
+        // Page number
+        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    }
+    // Load data
+    function LoadData($file)
+    {
+        // Read file lines
+        $lines = file($file);
+        $data = array();
+        foreach ($lines as $line)
+            $data[] = explode(';', trim($line));
+        return $data;
+    }
+
+    // Simple table
+    function BasicTable($header, $data)
+    {
+        // Header
+        foreach ($header as $col)
+            $this->Cell(40, 5, 15, 1);
+        $this->Ln();
+        // Data
+        foreach ($data as $row) {
+            foreach ($row as $col)
+                $this->Cell(40, 6, $col, 1);
+            $this->Ln();
+        }
+    }
+
+
+    // Better table
+    function ImprovedTable($header, $data)
+    {
+        // Column widths
+        $w = array(40, 35, 40, 45);
+        // Header
+        for ($i = 0; $i < count($header); $i++)
+            $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C');
+        $this->Ln();
+        // Data
+        foreach ($data as $row) {
+            $this->Cell($w[0], 6, $row[0], 'LR');
+            $this->Cell($w[1], 6, $row[1], 'LR');
+            $this->Cell(15, 6, number_format($row[2]), 'LR', 0, 'R');
+            $this->Cell($w[3], 6, number_format($row[3]), 'LR', 0, 'R');
+            $this->Ln();
+        }
+        // Closing line
+        $this->Cell(array_sum($w), 0, '', 'T');
+    }
+
+    // Colored table
+    function FancyTable($header, $data)
+    {
+        // Colors, line width and bold font
+        $this->SetFillColor(200, 100, 100);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(128, 0, 0);
+        $this->SetLineWidth(.3);
+        $this->SetFont('', 'B');
+        // Header
+        $w = array(40, 35, 40, 45);
+        for ($i = 0; $i < count($header); $i++)
+            $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', true);
+        $this->Ln();
+        // Color and font restoration
+        $this->SetFillColor(224, 235, 255);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+        // Data
+        $fill = false;
+        foreach ($data as $row) {
+            $this->Cell($w[0], 6, $row[0], 'LR', 0, 'L', $fill);
+            $this->Cell($w[1], 6, $row[1], 'LR', 0, 'L', $fill);
+            $this->Cell(15, 6, number_format($row[2]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[3], 6, number_format($row[3]), 'LR', 0, 'R', $fill);
+            $this->Ln();
+            $fill = !$fill;
+        }
+        // Closing line
+        $this->Cell(array_sum($w), 0, '', 'T');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * @param mixed $nombre
+     *
+     * @return self
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAp()
+    {
+        return $this->ap;
+    }
+
+    /**
+     * @param mixed $ap
+     *
+     * @return self
+     */
+    public function setAp($ap)
+    {
+        $this->ap = $ap;
+        return $this;
+    }
+    /**
+     * @return mixed
+     */
+    public function getAm()
+    {
+        return $this->ap;
+    }
+
+    /**
+     * @param mixed $ap
+     *
+     * @return self
+     */
+    public function setAm($am)
+    {
+        $this->am = $am;
+        return $this;
+    }
+}
+
 

@@ -1,4 +1,5 @@
 var host = "localhost";
+//console.log($("#apellidom").val())
 // SUMA Y RESTA DE LOS CAMPOS 
 $("#totalRemu").on("input", function () {
   // OBTENEMOS LA FECHA SELECCIONADA CONVERTIDA A DATE
@@ -42,7 +43,7 @@ $("#planillaForm").submit(function (event) {
     data: formData,
     success: function (response) {
       // Respuesta del servidor
-      console.log(response);
+      //console.log(response);
       if (response == "ERROR") {
         //Mensaje modal de ingreso exitoso
         $("#title-modal").text("Ingreso Fallido");
@@ -55,7 +56,7 @@ $("#planillaForm").submit(function (event) {
         );
         //mensaje modal END
         $(".modal-overlay").fadeIn();
-        console.log("algo salio mal");
+        //console.log("algo salio mal");
       } else {
         //Mensaje modal de ingreso exitoso
         $("#title-modal").text("Ingreso exitoso");
@@ -77,7 +78,7 @@ $("#planillaForm").submit(function (event) {
         $("#vet").val("");
         $("#remBasica").val("");
         $("#remReunificada").val("");
-        $("#deSupremo").val("");
+        $("#desupremo").val("");
         $("#otros").val("");
         $("#ley19990").val("");
         $("#ley20530").val("");
@@ -85,7 +86,7 @@ $("#planillaForm").submit(function (event) {
         $("#ipss").val("");
         $("#fonavi").val("");
         $(".modal-overlay").fadeIn();
-        console.log("todo salio bien");
+        //console.log("todo salio bien");
       }
     },
     error: function (error) {

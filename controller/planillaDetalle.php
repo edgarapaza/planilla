@@ -47,7 +47,7 @@ class PlanillaDetalle extends Controller
         $idpersonal = $_POST['idpersonal'];
         $condicion = $_POST['condicion'];
         $moneda = $_POST['moneda'];
-        // Inputs numeros
+        //inputs numeros
         $muc = $_POST['muc'] == '' ? 0 : $_POST['muc'];
         $vet = $_POST['vet'] == '' ? 0 : $_POST['vet'];
         $rembasica = $_POST['remBasica'] == '' ? 0 : $_POST['remBasica'];

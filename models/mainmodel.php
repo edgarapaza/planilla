@@ -7,7 +7,7 @@ class MainModel extends Model
     parent::__construct();
   }
   public function Read(){
-    $sql = "SELECT id, CONCAT(nombres,' ',ap,' ',am) AS nombres,cargo, fecha_inicial, fecha_final FROM tabla;";
+    $sql = "SELECT id, CONCAT(nombres,' ',ap,' ',am) AS nombres,cargo, fecha_inicial, fecha_final FROM mtc.tabla;"; 
     $res = $this->conn->ConsultaCon($sql);
     return $res;
   }

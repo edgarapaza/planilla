@@ -95,7 +95,7 @@ function table() {
     url: `http://${host}/planilla/planillaDetalle/getAllPlanilla`,
     data: { nombres, ap, am },
     success: function (response) {
-      console.log(response);
+      //console.log(response);
       let data = JSON.parse(response);
       let html = "";
       data.forEach((element) => {
@@ -112,7 +112,7 @@ function table() {
                     </td>
                     <td>
                     <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
-                    <a href="#" class="button success">FONAVI</a>
+                    <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                     </td>
                 </tr>`;
       });
@@ -131,11 +131,11 @@ $("#planillaForm").submit(function (event) {
   var formData = $(this).serialize(); // Serializar datos del formulario
   $.ajax({
     type: "POST",
-    url: "http://${host}/planilla/planillaDetalle/update",
+    url: `http://${host}/planilla/planillaDetalle/update`,
     data: formData,
     success: function (response) {
       // Respuesta del servidor
-      console.log(response);
+      //console.log(response);
       if (response == "ERROR") {
         //Mensaje modal de ingreso exitoso
         $("#title-modal").text("Ingreso Fallido");
@@ -149,6 +149,7 @@ $("#planillaForm").submit(function (event) {
         //mensaje modal END
         $(".modal-overlay").fadeIn();
       } else {
+        table();
         //Mensaje modal de ingreso exitoso
         $("#title-modal").text("Ingreso exitoso");
         $("#text-modal").text("Planilla registrada con exito");

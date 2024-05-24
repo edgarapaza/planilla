@@ -44,7 +44,7 @@
         </div>
         <div class="cell large-4 text-center">
           <p class="lead">
-            Liquidaciones
+            
           </p>
         </div>
       </div>

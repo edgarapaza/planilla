@@ -31,7 +31,6 @@ class Conexion
       echo 'Excepción: ',  $e->getMessage();
       $res = FALSE;
     }
-
     return $res;
     mysqli_close($this->conn);
   }
@@ -44,7 +43,6 @@ class Conexion
     } catch (Exception $e) {
       echo 'Excepción: ',  $e->getMessage();
     }
-
     return $result;
     mysqli_close($this->conn);
   }

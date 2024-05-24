@@ -93,8 +93,6 @@
                                 <select id="condicion" name="condicion">
                                     <option value="A">Activo</option>
                                     <option value="P">Pensionista</option>
-                                    <option value="S">S</option>
-                                    <option value="NA">NA</option>
                                 </select>
                             </span>
                             <span>
@@ -164,10 +162,8 @@
                             <span>
                                 <label for="trabajador" class="large-4">Trabajador :</label>
                                 <select name="trabajador" id="trabajador">
-                                    <option value="O">O</option>
-                                    <option value="E">E</option>
-                                    <option value="0">0</option>
-                                    <option value="NA">NA</option>
+                                    <option value="O">Obrero</option>
+                                    <option value="E">Empleado</option>
                                 </select>
                             </span>
                         </div>
@@ -175,7 +171,8 @@
                             <div class="grid-x align-spaced">
                                 <input type="text" name="idpersonal" value="<?php echo $_SESSION['idper']; ?>"
                                     id="idpersonal" placeholder="00.0" hidden>
-                                
+                                <input type="text" name="id" value="<?php echo $_SESSION['id']; ?>"
+                                    id="id" placeholder="00.0" hidden>
                                 <div class="cell small-3"><button type="submit" class="button success">Actualizar</button>
                                 </div>
                                 <div class="cell small-3"><a href="<?php echo constant('URL')?>main/render" class="button warning">Ir a Menu</a></div>

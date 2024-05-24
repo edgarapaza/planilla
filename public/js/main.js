@@ -14,7 +14,6 @@ function table() {
     type: "GET",
     url: `http://${host}/planilla/main/read`,
     success: function (response) {
-      //console.log(response);
       let datas = JSON.parse(response);
       var data = datas.slice(inicio, fin);
       let html = "";
@@ -32,7 +31,7 @@ function table() {
                     </td>
                     <td>
                     <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
-                    <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
+                    <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                     </td>
                 </tr>`;
       });
@@ -56,7 +55,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
     url: `http://${host}/planilla/main/search`,
     data: { nombres, ap, am, cargo },
     success: function (response) {
-      console.log(response);
+      //console.log(response);
       let data = JSON.parse(response);
       let html = "";
       data.forEach((element) => {
@@ -73,7 +72,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         </td>
                         <td>
                         <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
-                        <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success">FONAVI</a>
+                        <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                         </td>
                     </tr>`;
       });

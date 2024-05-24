@@ -21,7 +21,7 @@ class PlanillaDetalleModel extends Model
     return $data;
   }
   public function Update($id,$condicion, $nombres, $apellidopa, $apellidoma, $fechaI, $fechaF, $cargo, $rembasica, $remunifi, $ds276, $remotros, $ley19990, $ley20530, $afp, $ipss, $fonavi, $moneda, $trabajador, $muc, $vet, $idpersonal){
-    $sql = "UPDATE planilla SET `condiper` = '$condicion', `nombres` = '$nombres', `ap` = '$apellidopa', `am` = '$apellidoma', `spdat1` = '$fechaI', `spdat2` = '$fechaF', `cargo` = '$cargo', `rembasica` = '$rembasica', `remunifi` = '$remunifi', `ds276` = '$ds276', `remotros` = '$remotros', `ley19990` = '$ley19990', `ley20530` = '$ley20530', `afp` = '$afp', `ipss` = '$ipss', `fonavi` = '$fonavi', `moneda` = '$moneda', `trabajador` = '$trabajador', `muc` = '$muc', `vet` = '$vet', `idpersonal` = '$idpersonal' WHERE (`id` = '$id');";
+    $sql = "UPDATE planilla SET `condiper` = '$condicion', `nombres` = '$nombres', `ap` = '$apellidopa', `am` = '$apellidoma', `spdat1` = '$fechaI', `spdat2` = '$fechaF', `cargo` = '$cargo', `rembasica` = '$rembasica', `remunifi` = '$remunifi', `ds276` = '$ds276', `remotros` = '$remotros', `ley19990` = '$ley19990', `ley20530` = '$ley20530', `afp` = '$afp', `ipss` = '$ipss', `fonavi` = '$fonavi', `moneda` = '$moneda', `trabajador` = '$trabajador', `muc` = '$muc', `vet` = '$vet', `idpersonal` = '$idpersonal' WHERE `id` = '$id';";
     $res = $this->conn->ConsultaSin($sql);
     return $res;
   }
