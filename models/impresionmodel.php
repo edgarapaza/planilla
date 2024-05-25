@@ -41,7 +41,7 @@ class ImpresionModel extends Model
 
 	function DetallexAnios($anio,$nombre,$ap,$am)
 	{
-		$sql = "SELECT id,condiper,nombres,ap,am,spdat1,spdat2,cargo,format(rembasica,2) as rembasica,format(remunifi,2) as remunifi,format(ds276,2) as ds276,format(remotros,2) as remotros,format(ley19990,2) as ley19990,format(ley20530,2) as ley20530,format(afp,2) as afp,format(ipss,2) as ipss,format(fonavi,2) as fonavi,moneda,trabajador,muc,vet,idpersonal, format(rembasica+remunifi+ds276+remotros,2) as bruto
+		$sql = "SELECT id,condiper,nombres,ap,am,spdat1,spdat2,cargo,format(rembasica,2) as rembasica,format(remunifi,2) as remunifi,format(ds276,2) as ds276,format(remotros,2) as remotros,format(ley19990,2) as ley19990,format(ley20530,2) as ley20530,format(afp,2) as afp,format(ipss,2) as ipss,format(fonavi,2) as fonavi,moneda,trabajador,muc,vet,idpersonal, format(rembasica+remunifi+ds276+remotros+muc+vet,2) as bruto
 			FROM mtc.planilla WHERE moneda = 'S' AND nombres = '$nombre' and ap = '$ap' and am = '$am' and spdat1 LIKE '$anio%' ORDER BY spdat1 ASC;";
 		$data = $this->conn->ConsultaCon($sql);
 		return $data;
@@ -67,7 +67,7 @@ class ImpresionModel extends Model
 
 	function planillas($nombre,$ap,$am)
 	{
-		$sql ="SELECT spdat1, spdat2,cargo,trabajador, format(sum(rembasica +remunifi+ds276+remotros),2) as bruto
+		$sql ="SELECT spdat1, spdat2,cargo,trabajador, format(sum(rembasica+remunifi+ds276+remotros+muc+vet),2) as bruto
 		FROM planilla
 		WHERE moneda = 'S' AND ap = '$ap' AND am='$am' AND nombres ='$nombre';";
 		$data = $this->conn->ConsultaArray($sql);
