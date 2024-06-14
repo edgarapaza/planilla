@@ -126,4 +126,11 @@ class ImpresionModel extends Model
 		$data = $this->conn->ConsultaArray($sql);
 		return $data;
 	}
+
+	function Calculadora($fecha1, $fecha2, $id)
+	{
+		$sql = "call calculadora('$fecha1','$fecha2', $id);";
+		$data = $this->conn->ConsultaArray($sql);
+		return $data;
+	}
 }

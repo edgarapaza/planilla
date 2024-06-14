@@ -1946,7 +1946,7 @@ class PDF extends FPDF
         $this->Cell(260, 5, 'DIRECCION REGIONAL DE TRANSPORTES, COMUNICACIONES, VIVIENDA Y CONSTRUCCION -  PUNO', 0, 1, 'C');
         $this->Cell(260, 5, 'CONSTANCIA CERTIFICADA DE PAGOS DE REMUNERACIONES Y DESCUENTOS DE ACUERDO A LAS PLANILLAS', 0, 1, 'C');
         $this->Cell(260, 5, 'UNICAS DE PAGO DE REMUNERACIONES CONSTA LOS SERVICIOS PRESTADOS', 0, 1, 'C');
-        $this->Cell(20, 1, "DON(ÑA):", 0, 1, 'L');
+        $this->Cell(20, 1, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Don(ña)"), 0, 1, 'L');
         $this->Cell(20, 10, 'FECHA: ', 0, 1, 'L');
 
     }
@@ -2058,7 +2058,7 @@ class Fonavi extends FPDF
         $this->Cell(180, 7, 'DIRECCION REGIONAL DE TRANSPORTES, COMUNICACIONES, VIVIENDA Y CONSTRUCCION -  PUNO', 0, 1, 'C');
         $this->Cell(180, 5, 'CONSTANCIA CERTIFICADA DE PAGOS DE APORTACIONES AL FONAVI', 0, 1, 'C');
         $this->Ln();
-        $this->Cell(20, 1, "DON(ÑA):". $this->getNombre(), 0, 1, 'L');
+        $this->Cell(20, 1, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Don(ña)1"). $this->getNombre(), 0, 1, 'L');
         $this->Cell(20, 10, 'FECHA: ', 0, 1, 'L');
 
     }

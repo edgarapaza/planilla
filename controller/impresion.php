@@ -13,6 +13,9 @@ class Impresion extends Controller
         if ($id == null || $id == '') {
             $this->view->Render("main/inicio");
         }
+
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+
         $persona = $this->model->buscarxId($id);
         $nombre = $persona['nombres'];
         $ap = $persona['ap'];
@@ -30,19 +33,28 @@ class Impresion extends Controller
             $fechafinal[] = $row1['spdat2'];
         }
         // #echo "Inicio: ". $fechainicio[0];
-// #echo " Fin:". $fechafinal[count($fechafinal)-1];
-//  FIN FECHAS GENERALES
+        // #echo " Fin:". $fechafinal[count($fechafinal)-1];
+        //  FIN FECHAS GENERALES
+
+
 
         $pdf = new PDF('L', 'mm', 'A4');
         $pdf->AliasNbPages();
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->AddPage();
 
+
+        $time1 = strtotime($fechainicio[0]);
+        $fecString1 = strftime("%d-%B-%Y", $time1);
+
+        $time2 = strtotime($fechafinal[count($fechafinal) - 1]);
+        $fecString2 = strftime("%d-%B-%Y", $time2);
+
         /* Agregando nombre*/
         $pdf->SetXY(30, 21);
         $pdf->Cell(0, 10, $nombre . " " . $ap . " " . $am, 0, 1, 'L');
         $pdf->SetXY(30, 27);
-        $pdf->Cell(0, 10, $fechainicio[0] . " HASTA " . $fechafinal[count($fechafinal) - 1], 0, 1, 'L');
+        $pdf->Cell(0, 10, $fecString1 . " HASTA " . $fecString2 , 0, 1, 'L');
 
 
         #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
@@ -265,9 +277,25 @@ class Impresion extends Controller
         $resum3 = $this->model->planillas($nombre, $ap, $am);
         // #echo "Inicio: ". $fechainicio[0];
         // #echo " Fin:". $fechafinal[count($fechafinal)-1];
+         /* Llamando a Calculadora de Años meses y dias*/
+
+        $muestra = $this->model->Calculadora($fechainicio[0], $fechafinal[count($fechafinal)-1], $id);
+        if($resum['trabajador'] === "E"){
+            $tipoemleado = "Empleado";
+        }else{
+            $tipoemleado = "Obrero";
+        }
+
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $timestamp1 = strtotime($fechainicio[0]);
+        $fecInicio1 = strftime("%d de %B del %Y", $timestamp1);
+
+        $timestamp2 = strtotime($fechafinal[count($fechafinal) - 1]);
+        $fecInicio2 = strftime("%d de %B del %Y", $timestamp2);
 
         // convierte texto a iso88591------------------------------
-        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fechainicio[0] . " hasta " . $fechafinal[count($fechafinal) - 1] . " durante 13 años, 2 meses 21 dias, en condición de " . $resum['trabajador'] . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+
+        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$muestra['anios']." años, ".$muestra['meses']." meses , ".ceil($muestra['dias'])." dias, en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
         // convierte texto a iso88591
         $ene = $this->utf8_to_iso88591($info);
         // se usa la variable $ene para mostrar la informacion
@@ -280,9 +308,12 @@ class Impresion extends Controller
         $pdf->Ln();
         $pdf->Cell(100, 7, 'En Nuevos Soles..................: ' . $resum3['bruto'], 0, 0, 'R');
         $pdf->Ln();
-        $pdf->MultiCell(270, 7, "Es cuanto CERTIFICA: La Unidad de Archivos y Liquidaciones de la Dirección Regional de Transportes, Comunicaciones, Vivienda y Construcción - Puno, tal como obran las copias de planillas en esta Unidad, se expide dicha Constancia Certificada de Pagos de Remuneraciones y Descuentos a solicitud del interesado para los fines que vea convenitente.:", 0, 'L');
+        $pdf->MultiCell(270, 7, "Es cuanto CERTIFICA: La Unidad de Archivos y Liquidaciones de la Direccion Regional de Transportes, Comunicaciones, Vivienda y Construccion - Puno, tal como obran las copias de planillas en esta Unidad, se expide dicha Constancia Certificada de Pagos de Remuneraciones y Descuentos a solicitud del interesado para los fines que vea convenitente.:", 0, 'L');
 
-        $pdf->Cell(260, 7, 'Puno, 13 de Mayo de 2024', 0, 0, 'R');
+
+        $fecActual = strftime("%d de %B del %Y");
+
+        $pdf->Cell(260, 7, "Puno, ". $fecActual, 0, 0, 'R');
 
         $pdf->Output();
     }
