@@ -1,4 +1,4 @@
-var host = "localhost";
+var host = "10.1.5.90";
 //console.log("funciona!!!");
 // agregar editar-> debe tener un filtro por fecha
 // al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
