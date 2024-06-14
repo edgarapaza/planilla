@@ -25,30 +25,34 @@
 </head>
 
 <body>
+    <div class="grid-container">
+
+    </div>
     <div class="grid-x header-z">
-        <div class="cell large-3">
+        <div class="cell small-12 medium-2 large-2">
             <div class="img-t">
                 <img class="logo-t" src="https://www.tramites.transportespuno.gob.pe/img/mesadepartes.png" alt="">
             </div>
         </div>
-        <div class="cell large-6">
+
+        <div class="cell small-12 medium-5 large-5">
             <div class="grid-x margin-top-1">
                 <div class="cell large-12 text-center">
-                    <p class="lead shadow">
-                        Este sistema permite registro, impresion de planillas y fonavi
-                    </p>
+                    <h4> <em>Este sistema permite registro, impresion de planillas y fonavi</em></h4>
                 </div>
             </div>
         </div>
-        <div class="cell large-3 margin-top-1">
-            <div class="grid-x">
+
+        <div class="cell small-12 medium-3 large-3 margin-top-1">
+            <div class="cell large-8" style="display:flex;">
+                <p class="name-z">Bienvenido: <?php echo $_SESSION['katari']; ?></p>
+            </div>
+        </div>
+
+        <div class="cell small-12 medium-2 large-2 margin-top-1">
                 <div class="cell large-8" style="display:flex;">
-                    <p class="name-z">Bienvenido: <?php echo $_SESSION['katari']; ?></p>
-                </div>
-                <div class="cell large-4 text-center">
                     <a href="<?php echo constant('URL'); ?>login/salir" class="button salir">SALIR</a>
                 </div>
-            </div>
         </div>
     </div>
     <!-- /Navigation -->

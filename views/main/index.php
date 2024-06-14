@@ -30,18 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cards">
-                <div class="grid-x">
-                    <div class="cell imagenes-z">
-                        <a class="imagen-enlace" href="<?php echo constant('URL') ?>main/inicio">
-                            <img src="<?php echo constant('URL') ?>public/img/salario.png" alt="">
-                        </a>
-                    </div>
-                    <div class="cell texto-z text-3 text-center">
-                        <p>LIQUIDACIONES</p>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
