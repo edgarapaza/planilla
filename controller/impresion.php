@@ -58,7 +58,7 @@ class Impresion extends Controller
 
 
         #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
-        $header = array('Desde', 'Hasta', 'Dias', 'CARGO', 'BASICA', 'MUC', 'VET', 'REUNIF', 'D.S.276', 'OTROS', 'TOTAL REMU', '20530', '19990', 'AFP', 'IPSS', 'FONAVI');
+        $header = array('Desde', 'Hasta', 'Dias', 'CARGO', 'BASICA', 'MUC', 'BET', 'REUNIF', 'D.S.276', 'OTROS', 'TOTAL REMU', '20530', '19990', 'AFP', 'IPSS', 'FONAVI');
         // Colors, line width and bold font
         $pdf->SetFillColor(200, 100, 100);
         $pdf->SetTextColor(255);
