@@ -16,7 +16,7 @@ class Conexion
       echo "Error al contenctar a MySQL: (" . $this->conn->connect_errno . ") " . $this->conn->connect_error;
       exit();
     }
-
+    $this->conn->set_charset("utf8mb4");
     #echo $this->conn->host_info . " ANTARES";
     return $this->conn;
   }

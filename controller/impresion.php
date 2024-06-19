@@ -1,16 +1,18 @@
 <?php
 require_once 'fpdf.php';    
-header("Content-Type: text/html;charset=utf-8");
+
 class Impresion extends Controller
 {
     function __construct()
     {
         parent::__construct();
     }
-    function pdf($param = null)
+
+     function pdf($param = null)
     {
         $id = $param[0];
-        if ($id == null || $id == '') {
+        if ($id == null || $id == '')
+        {
             $this->view->Render("main/inicio");
         }
 
@@ -23,41 +25,32 @@ class Impresion extends Controller
 
 
         /* Fechas generales*/
-        $sql = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE nombres = '$nombre' and ap = '$ap' and am = '$am';";
+        $sql = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE nombres = '$nombre' and ap = '$ap' and am = '$am' ORDER BY spdat1;";
         $data = $this->model->AniosTrabajados($sql);
         $fechainicio = array();
         $fechafinal = array();
 
-        while ($row1 = mysqli_fetch_array($data)) {
-            $fechainicio[] = $row1['spdat1'];
-            $fechafinal[] = $row1['spdat2'];
+        $t = 0;
+        while ($row1 = mysqli_fetch_array($data))
+        {
+            $fechainicio[$t] = $row1['spdat1'];
+            $fechafinal[$t] = $row1['spdat2'];
+            $t++;
         }
         // #echo "Inicio: ". $fechainicio[0];
         // #echo " Fin:". $fechafinal[count($fechafinal)-1];
         //  FIN FECHAS GENERALES
 
-
-
         $pdf = new PDF('L', 'mm', 'A4');
         $pdf->AliasNbPages();
         $pdf->SetFont('Arial', 'B', 8);
+
+        $pdf->minombre = $nombre. " " . $ap ." ". $am;
+        $pdf->fechaInicial = $fechainicio[0];
+        $pdf->fechaFinal = $fechafinal[count($fechafinal)-1];
+
         $pdf->AddPage();
 
-
-        $time1 = strtotime($fechainicio[0]);
-        $fecString1 = strftime("%d-%B-%Y", $time1);
-
-        $time2 = strtotime($fechafinal[count($fechafinal) - 1]);
-        $fecString2 = strftime("%d-%B-%Y", $time2);
-
-        /* Agregando nombre*/
-        $pdf->SetXY(30, 21);
-        $pdf->Cell(0, 10, $nombre . " " . $ap . " " . $am, 0, 1, 'L');
-        $pdf->SetXY(30, 27);
-        $pdf->Cell(0, 10, $fecString1 . " HASTA " . $fecString2 , 0, 1, 'L');
-
-
-        #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
         $header = array('Desde', 'Hasta', 'Dias', 'CARGO', 'BASICA', 'MUC', 'BET', 'REUNIF', 'D.S.276', 'OTROS', 'TOTAL REMU', '20530', '19990', 'AFP', 'IPSS', 'FONAVI');
         // Colors, line width and bold font
         $pdf->SetFillColor(200, 100, 100);
@@ -66,10 +59,10 @@ class Impresion extends Controller
         $pdf->SetLineWidth(.3);
         $pdf->SetFont('', 'B');
         // Header
-        $w = array(16, 16, 8, 40, 15, 15, 15, 15, 15, 22, 22, 15, 15, 15, 15);
+        $w0 = array(16, 16, 8, 40, 15, 15, 15, 15, 15, 22, 22, 15, 15, 15, 15);
 
-        for ($k = 0; $k < count($header); $k++) {
-            $pdf->Cell($w[$k], 7, $header[$k], 1, 0, 'C', true);
+        for ($h1 = 0; $h1 < count($header); $h1++) {
+            $pdf->Cell($w0[$h1], 7, $header[$h1], 1, 0, 'C', true);
         }
         $pdf->Ln();
         // Color and font restoration
@@ -79,10 +72,6 @@ class Impresion extends Controller
         // Data
         $fill = false;
 
-        $dias1 = array();
-        $dias2 = array();
-        $dias3 = array();
-
         /* SECCION PARA SOLES DE ORO  */
         $sqlo = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'O' AND nombres = '$nombre' and ap = '$ap' and am = '$am' group by year(spdat1);";
 
@@ -90,25 +79,29 @@ class Impresion extends Controller
         $anioinicio1 = array();
         $aini1 = array();
         $a = 0;
-        while ($row = $datao->fetch_array(MYSQLI_ASSOC)) {
+        while ($row = $datao->fetch_array(MYSQLI_ASSOC))
+        {
             $anioinicio1[$a] = $row['spdat1'];
             $aini1[$a] = substr($anioinicio1[$a], 0, 4);
             $a++;
         }
 
+        $dias1 = array();
         $p = 0;
-        foreach ($aini1 as $anio) {
-            $pdf->Cell($w[0], 6, $anio, 'LR', 0, 'L', $fill);
+        foreach ($aini1 as $anio1)
+        {
+            $pdf->Cell($w0[0], 6, $anio1, 'LR', 0, 'L', $fill);
             $pdf->Ln();
-            $datap = $this->model->DetallexAnioo($anio, $nombre, $ap, $am);
+            $data1 = $this->model->DetallexAnioo($anio1, $nombre, $ap, $am);
 
-            while ($row = mysqli_fetch_array($datap)) {
+            while ($row = mysqli_fetch_array($data1))
+            {
                 $pdf->Cell(16, 6, $row['spdat1'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(16, 6, $row['spdat2'], 'LR', 0, 'L', $fill);
                 $fecha1 = new DateTime($row['spdat1']);
                 $fecha2 = new DateTime($row['spdat2']);
                 $diff = $fecha1->diff($fecha2);
-                $dias1[$p] = $diff->days + 1;
+                $dias1[] = $diff->days + 1;
                 $pdf->Cell(8, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
                 $pdf->Cell(40, 6, $row['cargo'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(15, 6, $row['rembasica'], 'LR', 0, 'R', $fill);
@@ -128,9 +121,10 @@ class Impresion extends Controller
                 $fill = !$fill;
                 $p++;
             }
+
             $sum1 = 0;
-            for ($j = 0; $j < count($dias1); $j++) {
-                $sum1 += $dias1[$j];
+            for ($e = 0; $e < count($dias1); $e++) {
+                $sum1 = $sum1 + $dias1[$e];
             }
             $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $sum1, 'L', 0, 'L', $fill);
             $pdf->Ln();
@@ -141,8 +135,6 @@ class Impresion extends Controller
         $resumen1 = $this->model->planillao($nombre, $ap, $am);
         $pdf->cell(275, 10, "                                                                               TOTAL SO/.                       " . $resumen1['bruto'], 1, 1, 'C');
 
-
-
         /* SECCION PARA INTIS  */
         $sqli = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'I' AND nombres = '$nombre' and ap = '$ap' and am = '$am' group by year(spdat1);";
 
@@ -150,25 +142,29 @@ class Impresion extends Controller
         $anioinicio2 = array();
         $aini2 = array();
         $b = 0;
-
-        while ($row = $datai->fetch_array(MYSQLI_ASSOC)) {
-            $anioinicio2[] = $row['spdat1'];
-            $aini2[] = substr($anioinicio2[$b], 0, 4);
+        while ($row = $datai->fetch_array(MYSQLI_ASSOC))
+        {
+            $anioinicio2[$b] = $row['spdat1'];
+            $aini2[$b] = substr($anioinicio2[$b], 0, 4);
             $b++;
         }
-        $q = 0;
-        foreach ($aini2 as $anio) {
-            $pdf->Cell($w[0], 6, $anio, 'LR', 0, 'L', $fill);
-            $pdf->Ln();
-            $datap = $this->model->DetallexAnioi($anio, $nombre, $ap, $am);
 
-            while ($row = mysqli_fetch_array($datap)) {
+        $dias2 = array();
+        $q = 0;
+        foreach ($aini2 as $anio2)
+        {
+            $pdf->Cell($w0[0], 6, $anio2, 'LR', 0, 'L', $fill);
+            $pdf->Ln();
+            $data2 = $this->model->DetallexAnioi($anio2, $nombre, $ap, $am);
+
+            while ($row = mysqli_fetch_array($data2))
+            {
                 $pdf->Cell(16, 6, $row['spdat1'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(16, 6, $row['spdat2'], 'LR', 0, 'L', $fill);
                 $fecha1 = new DateTime($row['spdat1']);
                 $fecha2 = new DateTime($row['spdat2']);
                 $diff = $fecha1->diff($fecha2);
-                $dias2[$q] = $diff->days + 1;
+                $dias2[] = $diff->days + 1;
                 $pdf->Cell(8, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
                 $pdf->Cell(40, 6, $row['cargo'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(15, 6, $row['rembasica'], 'LR', 0, 'R', $fill);
@@ -188,11 +184,14 @@ class Impresion extends Controller
                 $fill = !$fill;
                 $q++;
             }
-            $sum2 = 0;
-            for ($m = 0; $m < count($dias2); $m++) {
-                $sum2 += $dias2[$m];
+
+            $stot1 = 0;
+            for ($l = 0; $l < count($dias2); $l++)
+            {
+                $stot1 = $stot1 + $dias2[$l];
             }
-            $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $sum2, 'L', 0, 'L', $fill);
+
+            $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $stot1, 'L', 0, 'L', $fill);
             $pdf->Ln();
             /* Limpiando el array*/
             unset($dias2);
@@ -210,24 +209,29 @@ class Impresion extends Controller
         $aini3 = array();
         $c = 0;
 
-        while ($row = $dataS->fetch_array(MYSQLI_ASSOC)) {
-            $anioinicio3[] = $row['spdat1'];
-            $aini3[] = substr($anioinicio3[$c], 0, 4);
+        while ($row = $dataS->fetch_array(MYSQLI_ASSOC))
+        {
+            $anioinicio3[$c] = $row['spdat1'];
+            $aini3[$c] = substr($anioinicio3[$c], 0, 4);
             $c++;
         }
-        $r = 0;
-        foreach ($aini3 as $anio) {
-            $pdf->Cell($w[0], 6, $anio, 'LR', 0, 'L', $fill);
-            $pdf->Ln();
-            $datap = $this->model->DetallexAnios($anio, $nombre, $ap, $am);
 
-            while ($row = mysqli_fetch_array($datap)) {
+        $dias3 = array();
+        $r = 0;
+        foreach ($aini3 as $anio3)
+        {
+            $pdf->Cell($w0[0], 6, $anio3, 'LR', 0, 'L', $fill);
+            $pdf->Ln();
+            $data3 = $this->model->DetallexAnios($anio3, $nombre, $ap, $am);
+
+            while ($row = mysqli_fetch_array($data3))
+            {
                 $pdf->Cell(16, 6, $row['spdat1'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(16, 6, $row['spdat2'], 'LR', 0, 'L', $fill);
                 $fecha1 = new DateTime($row['spdat1']);
                 $fecha2 = new DateTime($row['spdat2']);
                 $diff = $fecha1->diff($fecha2);
-                $dias3[$r] = $diff->days + 1;
+                $dias3[] = $diff->days + 1;
                 $pdf->Cell(8, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
                 $pdf->Cell(40, 6, $row['cargo'], 'LR', 0, 'L', $fill);
                 $pdf->Cell(15, 6, $row['rembasica'], 'LR', 0, 'R', $fill);
@@ -247,9 +251,10 @@ class Impresion extends Controller
                 $fill = !$fill;
                 $r++;
             }
+
             $sum3 = 0;
-            for ($n = 0; $n < count($dias3); $n++) {
-                $sum3 += $dias3[$n];
+            for ($n = 0; $n < count($dias3) ; $n++) {
+                $sum3 = $sum3 + $dias3[$n];
             }
             $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $sum3, 'L', 0, 'L', $fill);
             $pdf->Ln();
@@ -261,7 +266,7 @@ class Impresion extends Controller
         $pdf->cell(275, 10, "                                                                               TOTAL NS/.                       " . $resumen3['bruto'], 1, 1, 'C');
 
 
-        $pdf->Cell(array_sum($w), 0, '', 'T');
+        $pdf->Cell(array_sum($w0), 0, '', 'T');
 
         $pdf->Ln(10);
         #MultiCell(float w, float h, string txt [, mixed border [, string align [, boolean fill]]])
@@ -317,66 +322,72 @@ class Impresion extends Controller
 
         $pdf->Output();
     }
+
     // FUNCION PARA CONVERTIR A ISO-8859-1 Y USAR ENIE
     function utf8_to_iso88591($string) {
         return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $string);
     }
+
+
+    /***************************************************************************/
+    /***************************************************************************/
+    /************          F   O    N   A   V   I   ***************************/
+    /***************************************************************************/
+    /***************************************************************************/
+
     public function fonavi($param = null)
     {
         $id = $param[0];
-        //$buscar = new Buscar();
-        //$id = $_GET['id'];
-        //$persona = $buscar->buscarxId($id);
         $persona = $this->model->buscarxId($id);
         $nombre = $persona['nombres'];
         $ap = $persona['ap'];
         $am = $persona['am'];
 
-        /*$nombre = 'PASCUAL';
-        $ap = 'CHAMBI';
-        $am = 'CAYO';*/
+        setlocale(LC_TIME, 'es_ES.UTF-8');
 
         /* Para mostrar la fecha inicio y la fecha final*/
-        $sql = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0;";
-        //$data = $buscar->AniosTrabajados($sql);
-        $data = $this->model->AniosTrabajados($sql);
-        $fechainicio = array();
-        $fechafinal = array();
+        $sqlfechas = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 ORDER BY spdat1;";
 
-        while ($row1 = mysqli_fetch_array($data)) {
-            $fechainicio[] = $row1['spdat1'];
-            $fechafinal[] = $row1['spdat2'];
+        $datafechasF = $this->model->AniosTrabajados($sqlfechas);
+        $fechainiciof1 = array();
+        $fechafinalf1 = array();
+
+        $f1=0;
+        while ($rowfechas = $datafechasF->fetch_array(MYSQLI_ASSOC))
+        {
+            $fechainiciof1[$f1] = $rowfechas['spdat1'];
+            $fechafinalf1[$f1] = $rowfechas['spdat2'];
+            $f1++;
         }
-        // #echo "Inicio: ". $fechainicio[0];
-        // #echo " Fin:". $fechafinal[count($fechafinal)-1];
+        // #echo "Inicio: ". $fechainiciof1[0];
+        // #echo " Fin:". $fechafinalf1[count($fechafinalf1)-1];
 
 
         /* Halla los años que tiene aportaciones en FONAVI por SOLES DE ORO*/
-        $sql = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'O' AND nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 group by year(spdat1);";
+        $sqlfo = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'O' AND nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 group by year(spdat1);";
 
-        $datoo = $this->model->AniosTrabajados($sql);
-        $anioinicio = array();
-        $aini = array();
+        $datofo = $this->model->AniosTrabajados($sqlfo);
+        $anioinicioforo = array();
+        $ainifo = array();
 
-        $i = 0;
-        while ($row = $datoo->fetch_array(MYSQLI_ASSOC)) {
-            $anioinicio[] = $row['spdat1'];
-            $aini[] = substr($anioinicio[$i], 0, 4);
-            $i++;
+        $g = 0;
+        while ($rowo = $datofo->fetch_array(MYSQLI_ASSOC))
+        {
+            $anioinicioforo[$g] = $rowo['spdat1'];
+            $ainifo[$g] = substr($anioinicioforo[$g], 0, 4);
+            $g++;
         }
 
 
         $pdf = new Fonavi('P', 'mm', 'A4');
         $pdf->AliasNbPages();
         $pdf->SetFont('Arial', 'B', 8);
-        $pdf->AddPage();
 
-        /* Agregando nombre*/
-        $pdf->SetXY(30, 21);
-        $pdf->Cell(0, 13, $nombre . " " . $ap . " " . $am, 0, 1, 'L');
-        $pdf->SetXY(30, 28);
-        $pdf->Cell(0, 10, $fechainicio[0] . " HASTA " . $fechafinal[count($fechafinal) - 1], 0, 1, 'L');
-        #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
+        $pdf->minombre = $nombre. " " . $ap ." ". $am;
+        $pdf->fechaInicial = $fechainiciof1[0];
+        $pdf->fechaFinal = $fechafinalf1[count($fechafinalf1)-1];
+
+        $pdf->AddPage();
 
         $header = array('PERIODO', 'DIA', 'CARGO', 'TOTAL REMENU', 'FONAVI');
         // Colors, line width and bold font
@@ -386,10 +397,12 @@ class Impresion extends Controller
         $pdf->SetLineWidth(.3);
         $pdf->SetFont('', 'B');
         // Header
-        $w = array(30, 10, 45, 35, 35);
+        $w1 = array(30, 10, 45, 35, 35);
 
-        for ($i = 0; $i < count($header); $i++)
-            $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C', true);
+        for ($u = 0; $u < count($header); $u++)
+        {
+            $pdf->Cell($w1[$u], 7, $header[$u], 1, 0, 'C', true);
+        }
         $pdf->Ln();
         // Color and font restoration
         $pdf->SetFillColor(224, 235, 255);
@@ -398,20 +411,24 @@ class Impresion extends Controller
         # id, spdat1, spdat2,cargo, sum(rembasica +remunifi+ds276+remotros) as bruto, fonavi
         // Data
         $fill = false;
-        $dias = array();
-        $mes = array();
-        $i = 0;
-        foreach ($aini as $anio) {
-            $pdf->Cell($w[0], 6, "YEAR: " . $anio, 'LR', 0, 'L', $fill);
+
+        $anioo = array();
+        $mesfo = array();
+        $diasfo = array();
+        $v = 0;
+        foreach ($ainifo as $aniof1)
+        {
+            $pdf->Cell($w1[0], 6, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Año:  ") . $aniof1, 'LR', 0, 'L', $fill);
             $pdf->Ln();
-            #$data = $buscar->fonavio($anio, $nombre, $ap, $am);
-            $data = $this->model->fonavio($anio, $nombre, $ap, $am);
 
-            while ($fila3 = $data->fetch_array(MYSQLI_ASSOC)) {
-                $anioo[] = $fila3['spdat1'];
-                $mes[] = substr($anioo[$i], 5, 2);
+            $datafo1 = $this->model->fonavio($aniof1, $nombre, $ap, $am);
 
-                switch ($mes[$i]) {
+            while ($filafo = $datafo1->fetch_array(MYSQLI_ASSOC))
+            {
+                $anioo[$v] = $filafo['spdat1'];
+                $mesfo[$v] = substr($anioo[$v], 5, 2);
+
+                switch ($mesfo[$v]) {
                     case '01':
                         $pdf->Cell(30, 6, "Enero", 'LR', 0, 'L', $fill);
                         break;
@@ -453,71 +470,79 @@ class Impresion extends Controller
                         break;
                 }
 
-                $fecha1 = new DateTime($fila3['spdat1']);
-                $fecha2 = new DateTime($fila3['spdat2']);
+                $fecha1 = new DateTime($filafo['spdat1']);
+                $fecha2 = new DateTime($filafo['spdat2']);
                 $diff = $fecha1->diff($fecha2);
-                $dias[] = $diff->days + 1;
+                $diasfo[] = $diff->days + 1;
 
                 #echo $sum;
                 // El resultados sera 3 dias
                 #echo $diff->days . ' dias';
 
                 $pdf->Cell(10, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
-                $pdf->Cell(45, 6, $fila3['cargo'], 'LR', 0, 'L', $fill);
-                $pdf->Cell(35, 6, $fila3['bruto'], 'LR', 0, 'R', $fill);
-                $pdf->Cell(35, 6, $fila3['fonavi'], 'LR', 0, 'R', $fill);
+                $pdf->Cell(45, 6, $filafo['cargo'], 'LR', 0, 'L', $fill);
+                $pdf->Cell(35, 6, $filafo['bruto'], 'LR', 0, 'R', $fill);
+                $pdf->Cell(35, 6, $filafo['fonavi'], 'LR', 0, 'R', $fill);
 
                 $pdf->Ln();
                 $fill = !$fill;
-                $i++;
+                $v++;
             }
 
-            $sum = 0;
-            #echo count($dias);
-            for ($j = 0; $j < count($dias); $j++) {
-                $sum += $dias[$j];
+            $sumfo = 0;
+
+            for ($a1 = 0; $a1 < count($diasfo); $a1++)
+            {
+                $sumfo = $sumfo + $diasfo[$a1];
             }
-            $pdf->Cell(15, 6, '              TOTAL DIAS : ' . $sum, 'L', 0, 'L', $fill);
+
+            $pdf->Cell(15, 6, '              TOTAL DIAS : ' . $sumfo, 'L', 0, 'L', $fill);
             $pdf->Ln();
-            unset($dias);
+            unset($diasfo);
         }
 
-        //$resumen1 = $buscar->totafonavioro($nombre, $ap, $am);
-        $resumen1 = $this->model->totafonavioro($nombre, $ap, $am);
-        $pdf->cell(155, 10, "                                                                               TOTAL SO/.                       " . $resumen1['bruto'] . "                             " . $resumen1['fonavi'], 1, 1, 'C');
+        $resumenf1 = $this->model->totafonavioro($nombre, $ap, $am);
+        $pdf->cell(155, 10, "                                                                               TOTAL SO/.                       " . $resumenf1['bruto'] . "                             " . $resumenf1['fonavi'], 1, 1, 'C');
 
+
+        /* *****************************************************************************/
         /* info para Intis */
+        /* *****************************************************************************/
         /* Halla los años que tiene aportaciones en FONAVI por intis  */
-        $sqli = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'I' AND nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 group by year(spdat1);";
+        $sqlfi = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'I' AND nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 group by year(spdat1);";
 
-        //$datai = $buscar->AniosTrabajados($sqli);
-        $datai = $this->model->AniosTrabajados($sqli);
-        $anioinicio2 = array();
-        $aini2 = array();
 
-        $i = 0;
-        while ($row = $datai->fetch_array(MYSQLI_ASSOC)) {
-            $anioinicio2[] = $row['spdat1'];
-            $aini2[] = substr($anioinicio2[$i], 0, 4);
-            $i++;
+        $datafi = $this->model->AniosTrabajados($sqlfi);
+        $anioiniciofi2 = array();
+        $ainifi2 = array();
+
+        $b1 = 0;
+        while ($fila4 = $datafi->fetch_array(MYSQLI_ASSOC))
+        {
+            $anioiniciofi2[$b1] = $fila4['spdat1'];
+            $ainifi2[$b1] = substr($anioiniciofi2[$b1], 0, 4);
+            $b1++;
         }
 
         // Data
         $fill = false;
-        $dias2 = array();
+        $aniofi2 = array();
         $mes2 = array();
-        $i = 0;
-        foreach ($aini2 as $anio) {
-            $pdf->Cell($w[0], 6, "YEAR: " . $anio, 'LR', 0, 'L', $fill);
+        $diasfi = array();
+
+        $c1 = 0;
+        foreach ($ainifi2 as $aniof2)
+        {
+            $pdf->Cell($w1[0], 6, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Año:  ") . $aniof2, 'LR', 0, 'L', $fill);
             $pdf->Ln();
-            //$datai = $buscar->fonavii($anio, $nombre, $ap, $am);
-            $datai = $this->model->fonavii($anio, $nombre, $ap, $am);
 
-            while ($filai = $datai->fetch_array(MYSQLI_ASSOC)) {
-                $anioi[] = $filai['spdat1'];
-                $mes2[] = substr($anioi[$i], 5, 2);
+            $datafi2 = $this->model->fonavii($aniof2, $nombre, $ap, $am);
 
-                switch ($mes2[$i]) {
+            while ($filafi2 = $datafi2->fetch_array(MYSQLI_ASSOC)) {
+                $aniofi2[$c1] = $filafi2['spdat1'];
+                $mes2[$c1] = substr($aniofi2[$c1], 5, 2);
+
+                switch ($mes2[$c1]) {
                     case '01':
                         $pdf->Cell(30, 6, "Enero", 'LR', 0, 'L', $fill);
                         break;
@@ -559,73 +584,75 @@ class Impresion extends Controller
                         break;
                 }
 
-                $fecha1 = new DateTime($filai['spdat1']);
-                $fecha2 = new DateTime($filai['spdat2']);
+                $fecha1 = new DateTime($filafi2['spdat1']);
+                $fecha2 = new DateTime($filafi2['spdat2']);
                 $diff = $fecha1->diff($fecha2);
-                $dias2[] = $diff->days + 1;
+                $diasfi[] = $diff->days + 1;
 
                 #echo $sum;
                 // El resultados sera 3 dias2
                 #echo $diff->days . ' dias2';
 
                 $pdf->Cell(10, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
-                $pdf->Cell(45, 6, $filai['cargo'], 'LR', 0, 'L', $fill);
-                $pdf->Cell(35, 6, $filai['bruto'], 'LR', 0, 'R', $fill);
-                $pdf->Cell(35, 6, $filai['fonavi'], 'LR', 0, 'R', $fill);
+                $pdf->Cell(45, 6, $filafi2['cargo'], 'LR', 0, 'L', $fill);
+                $pdf->Cell(35, 6, $filafi2['bruto'], 'LR', 0, 'R', $fill);
+                $pdf->Cell(35, 6, $filafi2['fonavi'], 'LR', 0, 'R', $fill);
 
                 $pdf->Ln();
                 $fill = !$fill;
-                $i++;
+                $c1++;
             }
 
-            $sum = 0;
-            #echo count($dias2);
-            for ($j = 0; $j < count($dias2); $j++) {
-                $sum += $dias2[$j];
+            $sumf2 = 0;
+
+            for ($j2 = 0; $j2 < count($diasfi); $j2++) {
+                $sumf2 += $diasfi[$j2];
             }
-            $pdf->Cell(15, 6, '              TOTAL DIAS : ' . $sum, 'L', 0, 'L', $fill);
+            $pdf->Cell(15, 6, '              TOTAL DIAS : ' . $sumf2, 'L', 0, 'L', $fill);
             $pdf->Ln();
-            unset($dias2);
+            unset($diasfi);
         }
 
         //$resumen1 = $buscar->totafonaviinti($nombre, $ap, $am);
-        $resumen1 = $this->model->totafonaviinti($nombre, $ap, $am);
-        $pdf->cell(155, 10, "                                                                               TOTAL I/.                       " . $resumen1['bruto'] . "                             " . $resumen1['fonavi'], 1, 1, 'C');
+        $resumenf2 = $this->model->totafonaviinti($nombre, $ap, $am);
+        $pdf->cell(155, 10, "                                                                               TOTAL I/.                       " . $resumenf2['bruto'] . "                             " . $resumenf2['fonavi'], 1, 1, 'C');
 
 
 
         /* info para NUEVOS SOLES */
         /* Halla los años que tiene aportaciones en FONAVI por NUEVOS SOLES  */
-        $sqls = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'S' AND nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 group by year(spdat1);";
+        $sqlfs = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE moneda = 'S' AND nombres = '$nombre' and ap = '$ap' and am = '$am' AND fonavi <> 0 group by year(spdat1);";
 
-        //$datas = $buscar->AniosTrabajados($sqls);
-        $datas = $this->model->AniosTrabajados($sqls);
-        $anioinicio3 = array();
-        $aini3 = array();
+        $datafs = $this->model->AniosTrabajados($sqlfs);
+        $anioiniciof3 = array();
+        $ainif3 = array();
 
-        $i = 0;
-        while ($row = $datas->fetch_array(MYSQLI_ASSOC)) {
-            $anioinicio3[] = $row['spdat1'];
-            $aini3[] = substr($anioinicio3[$i], 0, 4);
-            $i++;
+        $i3 = 0;
+        while ($fila5 = $datafs->fetch_array(MYSQLI_ASSOC)) {
+            $anioiniciof3[$i3] = $fila5['spdat1'];
+            $ainif3[$i3] = substr($anioiniciof3[$i3], 0, 4);
+            $i3++;
         }
 
         // Data
         $fill = false;
-        $dias3 = array();
-        $mes3 = array();
-        $i = 0;
-        foreach ($aini3 as $anio) {
-            $pdf->Cell($w[0], 6, "YEAR: " . $anio, 'LR', 0, 'L', $fill);
+
+        $aniosf3 = array();
+        $mesf3 = array();
+        $diasf3 = array();
+        $i5 = 0;
+        foreach ($ainif3 as $aniof3) {
+            $pdf->Cell($w1[0], 6, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Año:  ") . $aniof3, 'LR', 0, 'L', $fill);
             $pdf->Ln();
-            //$datans = $buscar->fonavis($anio, $nombre, $ap, $am);
-            $datans = $this->model->fonavis($anio, $nombre, $ap, $am);
 
-            while ($filas = $datans->fetch_array(MYSQLI_ASSOC)) {
-                $anios[] = $filas['spdat1'];
-                $mes3[] = substr($anios[$i], 5, 2);
+            $datafns = $this->model->fonavis($aniof3, $nombre, $ap, $am);
 
-                switch ($mes3[$i]) {
+            while ($filafs = $datafns->fetch_array(MYSQLI_ASSOC))
+            {
+                $aniosf3[$i5] = $filafs['spdat1'];
+                $mesf3[$i5] = substr($aniosf3[$i5], 5, 2);
+
+                switch ($mesf3[$i5]) {
                     case '01':
                         $pdf->Cell(30, 6, "Enero", 'LR', 0, 'L', $fill);
                         break;
@@ -667,57 +694,56 @@ class Impresion extends Controller
                         break;
                 }
 
-                $fecha1 = new DateTime($filas['spdat1']);
-                $fecha2 = new DateTime($filas['spdat2']);
+                $fecha1 = new DateTime($filafs['spdat1']);
+                $fecha2 = new DateTime($filafs['spdat2']);
                 $diff = $fecha1->diff($fecha2);
-                $dias3[] = $diff->days + 1;
+                $diasf3[] = $diff->days + 1;
 
                 #echo $sum;
                 // El resultados sera 3 dias3
                 #echo $diff->days . ' dias3';
 
                 $pdf->Cell(10, 6, $diff->days + 1, 'LR', 0, 'L', $fill);
-                $pdf->Cell(45, 6, $filas['cargo'], 'LR', 0, 'L', $fill);
-                $pdf->Cell(35, 6, $filas['bruto'], 'LR', 0, 'R', $fill);
-                $pdf->Cell(35, 6, $filas['fonavi'], 'LR', 0, 'R', $fill);
+                $pdf->Cell(45, 6, $filafs['cargo'], 'LR', 0, 'L', $fill);
+                $pdf->Cell(35, 6, $filafs['bruto'], 'LR', 0, 'R', $fill);
+                $pdf->Cell(35, 6, $filafs['fonavi'], 'LR', 0, 'R', $fill);
 
                 $pdf->Ln();
                 $fill = !$fill;
-                $i++;
+                $i5++;
             }
 
-            $sum = 0;
-            #echo count($dias3);
-            for ($j = 0; $j < count($dias3); $j++) {
-                $sum += $dias3[$j];
+            $sumf33 = 0;
+
+            for ($j4 = 0; $j4 < count($diasf3); $j4++) {
+                $sumf33 = $sumf33 + $diasf3[$j4];
             }
-            $pdf->Cell(15, 6, '              TOTAL DIAS : ' . $sum, 'L', 0, 'L');
+            $pdf->Cell(15, 6, '              TOTAL DIAS : ' . $sumf33, 'L', 0, 'L');
             $pdf->Ln();
-            unset($dias3);
+            unset($diasf3);
 
         }
 
         //$resumen1 = $buscar->totafonavisoles($nombre, $ap, $am);
-        $resumen1 = $this->model->totafonavisoles($nombre, $ap, $am);
-        $pdf->cell(155, 10, "                                                                               TOTAL NS/.                       " . $resumen1['bruto'] . "                             " . $resumen1['fonavi'], 1, 1, 'C');
+        $resumenf3 = $this->model->totafonavisoles($nombre, $ap, $am);
+        $pdf->cell(155, 10, "                                                                               TOTAL NS/.                       " . $resumenf3['bruto'] . "                             " . $resumenf3['fonavi'], 1, 1, 'C');
 
         $pdf->Cell(20, 5, 'Lo que se expide a solicitud del interesado conforme a los descuentos en Planilla de Remuneraciones con la moneda de los', 0, 0, 'L');
         $pdf->Ln();
-        $pdf->Cell(20, 3, 'años que se le pago.', 0, 0, 'L');
+        $pdf->Cell(20, 3, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "años que se le pago."), 0, 0, 'L');
+        $pdf->Ln();
         $pdf->Ln();
         $pdf->Cell(20, 4, 'SO/. = Sol de Oro        I/.= Intis         NS/.= Nuevos Soles', 0, 0, 'L');
         $pdf->Ln();
-        $pdf->Cell(165, 6, 'Puno, ' . date('d') . ' de ' . date('M') . '  de ' . date('Y'), 0, 0, 'R');
 
+
+        $fecActual = strftime("%d de %B del %Y");
+
+        $pdf->Cell(180, 7, "Puno, ". $fecActual, 0, 0, 'R');
 
         $pdf->Output();
     }
 
 }
-
-
-
-
-
 
 ?>
