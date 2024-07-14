@@ -52,7 +52,7 @@ class Impresion extends Controller
 
         /* Agregando nombre*/
         $pdf->SetXY(30, 21);
-        $pdf->Cell(0, 10, $nombre . " " . $ap . " " . $am, 0, 1, 'L');
+        $pdf->Cell(0, 10, $this->utf8_to_iso88591($nombre) . " " . $this->utf8_to_iso88591($ap) . " " . $this->utf8_to_iso88591($am), 0, 1, 'L');
         $pdf->SetXY(30, 27);
         $pdf->Cell(0, 10, $fecString1 . " HASTA " . $fecString2 , 0, 1, 'L');
 

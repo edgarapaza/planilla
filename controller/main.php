@@ -23,9 +23,12 @@ class Main extends Controller
 		$this->view->Render('planilla/index');
 	}
 	public function read(){
+		//$this->model->conn->conn->set_charset("utf8mb4");
 		$data = $this->model->Read();
+		//echo var_dump($data);
 		$json = array();
 		while($row = mysqli_fetch_array($data)){
+			//echo $row['ap'].'->'.$row['am'].'<br>';
 			$json[] = array(
 				'id' => $row['id'],
 				'nombres' => $row['nombres'],
@@ -33,7 +36,9 @@ class Main extends Controller
 				'fecha_inicial' => $row['fecha_inicial'],
 				'fecha_final' => $row['fecha_final'],
 			);
+			//echo var_dump($json).'<br>';
 		}
+		//echo var_dump($json).'<br>';
 		echo json_encode($json);
 	}
 	public function search(){

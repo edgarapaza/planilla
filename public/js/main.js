@@ -14,6 +14,7 @@ function table() {
     type: "GET",
     url: `http://${host}/planilla/main/read`,
     success: function (response) {
+      //console.log(response)
       let datas = JSON.parse(response);
       var data = datas.slice(inicio, fin);
       let html = "";
@@ -37,7 +38,7 @@ function table() {
       });
       $("#datos").html(html);
       // Crear controles de paginación
-      crearControlesPaginacion(datas);
+      //crearControlesPaginacion(datas);
     },
     error: function (error) {
       console.error("Error en la solicitud", error);
@@ -77,7 +78,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                     </tr>`;
       });
 
-      $("#datos").html(html);
+      $("#datos").html(html); 
     },
     error: function (error) {
       console.error("Error en la solicitud", error);
