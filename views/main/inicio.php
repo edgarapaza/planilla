@@ -59,7 +59,7 @@
     <div class="cell large-12">
       <div class="cell">
       <h4>Registros</h4>
-      <a href="<?php echo constant('URL')?>planilla" class="button success">Nueva Planilla</a>
+      <a href="<?php echo constant('URL');?>planilla" class="button success">Nueva Planilla</a>
       </div>
       <table class="text-center">
         <thead>

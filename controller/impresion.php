@@ -313,7 +313,7 @@ class Impresion extends Controller
         $aniosServicio = $interval->y;
         $mesesServicio = $interval->m;
         $diasServicio = $interval->d;
-        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$aniosServicio." años, ".$mesesServicio." meses , ".ceil($diasServicio)." dias, en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$aniosServicio." año(s), ".$mesesServicio." mes(es) , ".ceil($diasServicio)." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
         // INFO ZETA END 
 
         // convierte texto a iso88591

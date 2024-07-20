@@ -64,8 +64,6 @@ if($_SESSION['tipo']=='viewer'){
                             <select id="condicion" name="condicion">
                                 <option value="A">Activo</option>
                                 <option value="P">Pensionista</option>
-                                <option value="S">S</option>
-                                <option value="NA">NA</option>
                             </select>
                         </span>
                         <span>
@@ -139,10 +137,8 @@ if($_SESSION['tipo']=='viewer'){
                         <span>
                             <label for="trabajador" class="large-4">Trabajador :</label>
                             <select name="trabajador" id="trabajador">
-                                <option value="O">O</option>
-                                <option value="E">E</option>
-                                <option value="0">0</option>
-                                <option value="NA">NA</option>
+                                <option value="O">Obrero</option>
+                                <option value="E">Empleado</option>
                             </select>
                         </span>
                     </div>
