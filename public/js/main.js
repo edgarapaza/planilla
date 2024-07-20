@@ -1,8 +1,5 @@
 var host = "localhost";
-//console.log("funciona!!!");
-// agregar editar-> debe tener un filtro por fecha
-// al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
-// automaticamente
+var tipo = $("#tipo").val();
 var registrosPorPagina = 100;
 var paginaActual = 1;
 var paginasMostradas = 7;
@@ -17,6 +14,7 @@ function table() {
       let datas = JSON.parse(response);
       var data = datas.slice(inicio, fin);
       let html = "";
+      let html_viewer = "";
       data.forEach((element) => {
         html += `
                 <tr id="${element.id}">
@@ -34,8 +32,25 @@ function table() {
                     <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                     </td>
                 </tr>`;
+        html_viewer += `
+                <tr id="${element.id}">
+                    <td>${element.id}</td>
+                    <td>${element.nombres}</td>
+                    <td>${element.cargo}</td>
+                    <td>${element.fecha_inicial}</td>
+                    <td>${element.fecha_final}</td>
+                    <td>
+                    <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+                    <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
+                    </td>
+                </tr>`;
       });
-      $("#datos").html(html);
+      if(tipo=="viewer"){
+        $("#datos").html(html_viewer);
+      }else{
+        $("#datos").html(html);
+      }
+      
       // Crear controles de paginación
       crearControlesPaginacion(datas);
     },
@@ -58,6 +73,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
       //console.log(response);
       let data = JSON.parse(response);
       let html = "";
+      let html_viewer = "";
       data.forEach((element) => {
         html += `
                     <tr>
@@ -75,9 +91,24 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                         </td>
                     </tr>`;
+        html_viewer += `
+                    <tr>
+                        <td>${element.id}</td>
+                        <td>${element.nombres}</td>
+                        <td>${element.cargo}</td>
+                        <td>${element.fecha_inicial}</td>
+                        <td>${element.fecha_final}</td>
+                        <td>
+                        <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+                        <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
+                        </td>
+                    </tr>`;
       });
-
-      $("#datos").html(html);
+      if(tipo=="viewer"){
+        $("#datos").html(html_viewer);
+      }else{
+        $("#datos").html(html);
+      }
     },
     error: function (error) {
       console.error("Error en la solicitud", error);

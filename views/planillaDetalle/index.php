@@ -1,4 +1,8 @@
-<?php require ('views/headerSesion.php'); ?>
+<?php require ('views/headerSesion.php'); 
+if($_SESSION['tipo']=='viewer'){
+    header('location: ' . constant('URL') . 'main/');
+}
+?>
 <link rel="stylesheet" href="<?php echo constant('URL') . 'public/css/planilla.css' ?>">
 <div class="modal-overlay">
     <div class="modal">
