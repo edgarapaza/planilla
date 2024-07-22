@@ -22,7 +22,7 @@ class Impresion extends Controller
         $nombre = $persona['nombres'];
         $ap = $persona['ap'];
         $am = $persona['am'];
-
+        $consultaFechas = $this->model->consultaFechas($nombre,$ap,$am);
 
         /* Fechas generales*/
         $sql = "SELECT spdat1,spdat2 FROM mtc.planilla WHERE nombres = '$nombre' and ap = '$ap' and am = '$am' ORDER BY spdat1;";
@@ -300,7 +300,22 @@ class Impresion extends Controller
 
         // convierte texto a iso88591------------------------------
 
-        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$muestra['anios']." años, ".$muestra['meses']." meses , ".ceil($muestra['dias'])." dias, en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+        //$info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$muestra['anios']." años, ".$muestra['meses']." meses , ".ceil($muestra['dias'])." dias, en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+        // INFO ZETA, MODO PRUEBA
+        //$consultaFechas = $this->model->consultaFechas($nombre,$ap,$am);
+        $date_inicio = new DateTime($consultaFechas['inicio']);
+        $date_final = new DateTime($consultaFechas['final']);
+    
+        // Calcular la diferencia
+        $interval = $date_inicio->diff($date_final);
+    
+        // Obtener los años, meses y días
+        $aniosServicio = $interval->y;
+        $mesesServicio = $interval->m;
+        $diasServicio = $interval->d;
+        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$aniosServicio." año(s), ".$mesesServicio." mes(es) , ".ceil($diasServicio)." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+        // INFO ZETA END 
+
         // convierte texto a iso88591
         $ene = $this->utf8_to_iso88591($info);
         // se usa la variable $ene para mostrar la informacion

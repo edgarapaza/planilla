@@ -1,6 +1,9 @@
-<?php require ('views/headerSesion.php'); ?>
+<?php require ('views/headerSesion.php'); 
+//echo 'ID: '.$_SESSION['idper']. '----Nombre: '.$_SESSION['katari'].'-->'.$_SESSION['tipo'];
+?>
 
 <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/buscar.css">
+<input type="text" name="tipo" id="tipo" value="<?php echo $_SESSION['tipo']?>" hidden style="display: none;">
 <div class="grid-container full margin-1">
   <div class="grid-x margin-vertical-1 large-up-4">
     <div class="cell">
@@ -56,7 +59,7 @@
     <div class="cell large-12">
       <div class="cell">
       <h4>Registros</h4>
-      <a href="<?php echo constant('URL')?>planilla" class="button success">Nueva Planilla</a>
+      <a href="<?php echo constant('URL');?>planilla" class="button success">Nueva Planilla</a>
       </div>
       <table class="text-center">
         <thead>
@@ -66,7 +69,9 @@
             <th class="text-center">Cargo</th>
             <th>Fecha Inicio</th>
             <th>Fecha Final</th>
+            <?php if($_SESSION['tipo']!='viewer'){?>
             <th class="text-center">Ingreso</th>
+            <?php }?>
             <th class="text-center" colspan="2">Impresion</th>
           </tr>
         </thead>

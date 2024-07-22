@@ -73,6 +73,11 @@ class ImpresionModel extends Model
 		$data = $this->conn->ConsultaArray($sql);
 		return $data;
 	}
+	public function consultaFechas($nombre,$ap,$am){
+		$sql = "SELECT (SELECT spdat1 FROM planilla where nombres = '$nombre' and ap = '$ap' and am = '$am' ORDER BY spdat1 LIMIT 1) as inicio,(SELECT spdat2 FROM planilla where nombres = '$nombre' and ap = '$ap' and am = '$am' ORDER BY spdat2 DESC LIMIT 1) as final;";
+		$data = $this->conn->ConsultaArray($sql);
+		return $data;
+	}
 	// ****************************************************************
 	/* CONSULTAS PARA FONAVI */
 	// ****************************************************************|
