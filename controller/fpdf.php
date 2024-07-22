@@ -68,6 +68,10 @@ protected $metadata;           // document properties
 protected $CreationDate;       // document creation date
 protected $PDFVersion;         // PDF version number
 
+public $minombre;
+public $fechaInicial;
+public $fechaFinal;
+
 /*******************************************************************************
 *                               Public methods                                 *
 *******************************************************************************/
@@ -100,6 +104,11 @@ function __construct($orientation='P', $unit='mm', $size='A4')
 	$this->ColorFlag = false;
 	$this->WithAlpha = false;
 	$this->ws = 0;
+
+	$this->minombre;
+	$this->fechaInicial;
+	$this->fechaFinal;
+
 	$this->iconv = function_exists('iconv');
 	// Font path
 	if(defined('FPDF_FONTPATH'))
@@ -1932,11 +1941,12 @@ protected function _enddoc()
 }
 }
 //********************** PDF ING. EDGAR********************************** */
+
 class PDF extends FPDF
 {
-    function Header()
+	function Header()
     {
-        // Logo
+
         $this->Image('http://localhost/planilla/public/img/logo.png',10,6,30);
         // Arial bold 15
         $this->SetFont('Arial','B',10);
@@ -1946,8 +1956,17 @@ class PDF extends FPDF
         $this->Cell(260, 5, 'DIRECCION REGIONAL DE TRANSPORTES, COMUNICACIONES, VIVIENDA Y CONSTRUCCION -  PUNO', 0, 1, 'C');
         $this->Cell(260, 5, 'CONSTANCIA CERTIFICADA DE PAGOS DE REMUNERACIONES Y DESCUENTOS DE ACUERDO A LAS PLANILLAS', 0, 1, 'C');
         $this->Cell(260, 5, 'UNICAS DE PAGO DE REMUNERACIONES CONSTA LOS SERVICIOS PRESTADOS', 0, 1, 'C');
-        $this->Cell(20, 1, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Don(ña)"), 0, 1, 'L');
-        $this->Cell(20, 10, 'FECHA: ', 0, 1, 'L');
+        $this->Cell(20, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Don(ña): " .$this->minombre) , 0, 1, 'L');
+
+        /*  conversion de la fecha*/
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $timestamp1 = strtotime($this->fechaInicial);
+        $fecInicio1 = strftime("%d de %B del %Y", $timestamp1);
+
+        $timestamp2 = strtotime($this->fechaFinal);
+        $fecInicio2 = strftime("%d de %B del %Y", $timestamp2);
+
+        $this->Cell(20, 5, 'FECHA: ' . $fecInicio1 . ' hasta ' . $fecInicio2, 0, 1, 'L');
 
     }
 
@@ -2043,10 +2062,6 @@ class PDF extends FPDF
 }
 class Fonavi extends FPDF
 {
-    public $nombre;
-    public $ap;
-    public $am;
-
     function Header()
     {
         // Logo
@@ -2058,8 +2073,16 @@ class Fonavi extends FPDF
         $this->Cell(180, 7, 'DIRECCION REGIONAL DE TRANSPORTES, COMUNICACIONES, VIVIENDA Y CONSTRUCCION -  PUNO', 0, 1, 'C');
         $this->Cell(180, 5, 'CONSTANCIA CERTIFICADA DE PAGOS DE APORTACIONES AL FONAVI', 0, 1, 'C');
         $this->Ln();
-        $this->Cell(20, 1, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Don(ña)1"). $this->getNombre(), 0, 1, 'L');
-        $this->Cell(20, 10, 'FECHA: ', 0, 1, 'L');
+        $this->Cell(20, 1, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Don(ña): " . $this->minombre), 0, 1, 'L');
+         /*  conversion de la fecha*/
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $timestamp1 = strtotime($this->fechaInicial);
+        $fecInicio1 = strftime("%d de %B del %Y", $timestamp1);
+
+        $timestamp2 = strtotime($this->fechaFinal);
+        $fecInicio2 = strftime("%d de %B del %Y", $timestamp2);
+
+        $this->Cell(20, 5, 'FECHA: ' . $fecInicio1 . ' hasta ' . $fecInicio2, 0, 1, 'L');
 
     }
 

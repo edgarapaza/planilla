@@ -84,7 +84,7 @@
                             <input type="text" name="muc" id="muc" placeholder="0.00" value="0">
                         </span>
                         <span>
-                            <label for="vet" class="large-4">Vet. :</label>
+                            <label for="vet" class="large-4">Bet. :</label>
                             <input type="text" name="vet" id="vet" placeholder="0.00" value="0">
                         </span>
                         <span>

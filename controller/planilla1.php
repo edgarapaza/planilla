@@ -39,10 +39,12 @@ while ($row1 = mysqli_fetch_array($data)) {
 // #echo "Inicio: ". $fechainicio[0];
 // #echo " Fin:". $fechafinal[count($fechafinal)-1];
 
-
-
 class PDF extends FPDF
 {
+    public $minombre;
+    public $fechaInicial;
+    public $fechaFinal;
+
     function Header()
     {
         // Logo
@@ -55,7 +57,7 @@ class PDF extends FPDF
         $this->Cell(260, 5, 'DIRECCION REGIONAL DE TRANSPORTES, COMUNICACIONES, VIVIENDA Y CONSTRUCCION -  PUNO', 0, 1, 'C');
         $this->Cell(260, 5, 'CONSTANCIA CERTIFICADA DE PAGOS DE REMUNERACIONES Y DESCUENTOS DE ACUERDO A LAS PLANILLAS', 0, 1, 'C');
         $this->Cell(260, 5, 'UNICAS DE PAGO DE REMUNERACIONES CONSTA LOS SERVICIOS PRESTADOS', 0, 1, 'C');
-        $this->Cell(20, 1, "DON(ÑA):", 0, 1, 'L');
+        $this->Cell(20, 1, "DON(ÑA):". $this->minombre, 0, 1, 'L');
         $this->Cell(20, 10, 'FECHA: ', 0, 1, 'L');
 
     }
@@ -95,7 +97,6 @@ class PDF extends FPDF
             $this->Ln();
         }
     }
-
 
     // Better table
     function ImprovedTable($header, $data)
@@ -158,7 +159,7 @@ $pdf->AddPage();
 
 
 #$this->Cell(0, 10, "DESDE: ".$fechainicio[0]."    HASTA: ".$fechafinal[count($fechafinal)-1]." ", 0, 1, 'L');
-$header = array('Desde', 'Hasta', 'TOT DIA','CARGO', 'BASICA','MUC','VET','REUNIF','D.S.276','OTROS', 'TOTAL REMU','20530','19990','AFP','IPSS','FONAVI');
+$header = array('Desde', 'Hasta', 'TOT DIA','CARGO', 'BASICA','MUC','BET','REUNIF','D.S.276','OTROS', 'TOTAL REMU','20530','19990','AFP','IPSS','FONAVI');
 // Colors, line width and bold font
 $pdf->SetFillColor(200, 100, 100);
 $pdf->SetTextColor(255);

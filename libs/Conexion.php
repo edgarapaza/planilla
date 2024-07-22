@@ -15,8 +15,8 @@ class Conexion
       echo "Error al contenctar a MySQL: (" . $this->conn->connect_errno . ") " . $this->conn->connect_error;
       exit();
     }
-
-    #echo $this->conn->host_info."archivo";
+    $this->conn->set_charset("utf8mb4");
+    #echo $this->conn->host_info . " KATARI";
     return $this->conn;
   }
 // borrar los echos de excepciones en PRODUCCION
