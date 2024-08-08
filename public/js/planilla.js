@@ -1,6 +1,7 @@
-var host = "10.1.5.90";
+// var host = "10.1.5.90";
+var host = "localhost";
 //console.log($("#apellidom").val())
-// SUMA Y RESTA DE LOS CAMPOS 
+// SUMA Y RESTA DE LOS CAMPOS
 $("#totalRemu").on("input", function () {
   // OBTENEMOS LA FECHA SELECCIONADA CONVERTIDA A DATE
   var fechaSeleccionada = new Date($("#fechaI").val());
@@ -11,7 +12,7 @@ $("#totalRemu").on("input", function () {
      var resultado = isNaN(result) ? 0 : result;
      $('#otros').val(resultado);
   }
-}); 
+});
 $("#remBasica, #remReunificada, #desupremo, #otros").on("input", function () {
   // OBTENEMOS LA FECHA SELECCIONADA CONVERTIDA A DATE
   var fechaSeleccionada = new Date($("#fechaI").val());

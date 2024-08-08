@@ -44,7 +44,7 @@
         </div>
         <div class="cell large-4 text-center">
           <p class="lead">
-            
+
           </p>
         </div>
       </div>
@@ -56,5 +56,3 @@
     </div>
   </div>
   <!-- /Navigation -->
-  fe1050042883  movistar
-  orden 1458864014
