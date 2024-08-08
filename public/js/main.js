@@ -1,5 +1,12 @@
 var host = "localhost";
+<<<<<<< HEAD
 var tipo = $("#tipo").val();
+=======
+//console.log("funciona!!!");
+// agregar editar-> debe tener un filtro por fecha
+// al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
+// automaticamente
+>>>>>>> 2df91fb5278937c8772ea95483f960672340c1d7
 var registrosPorPagina = 100;
 var paginaActual = 1;
 var paginasMostradas = 7;
