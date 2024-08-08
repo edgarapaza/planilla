@@ -56,5 +56,3 @@
     </div>
   </div>
   <!-- /Navigation -->
-  fe1050042883  movistar
-  orden 1458864014

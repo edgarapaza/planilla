@@ -1,4 +1,4 @@
-var host = "10.1.5.90";
+var host = "localhost";
 // SUMA Y RESTA DE LOS CAMPOS 
 $("#totalRemu").on("input", function () {
   // OBTENEMOS LA FECHA SELECCIONADA CONVERTIDA A DATE

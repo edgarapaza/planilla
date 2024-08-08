@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-var host = "10.1.5.90";
+var host = "localhost";
 //console.log("funciona!!!");
 // agregar editar-> debe tener un filtro por fecha
 // al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
 // automaticamente
-=======
-var host = "localhost";
-var tipo = $("#tipo").val();
->>>>>>> 860c0ec5d69e66d8c0d40af5b7cf370f80e698a0
 var registrosPorPagina = 100;
 var paginaActual = 1;
 var paginasMostradas = 7;
