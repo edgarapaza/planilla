@@ -8,7 +8,7 @@ class Impresion extends Controller
         parent::__construct();
     }
 
-     function pdf($param = null)
+    function pdf($param = null)
     {
         $id = $param[0];
         if ($id == null || $id == '')
@@ -61,10 +61,6 @@ class Impresion extends Controller
         // Header
         $w0 = array(16, 16, 8, 40, 15, 15, 15, 15, 15, 22, 22, 15, 15, 15, 15);
 
-        for ($h1 = 0; $h1 < count($header); $h1++) {
-            $pdf->Cell($w0[$h1], 7, $header[$h1], 1, 0, 'C', true);
-        }
-        $pdf->Ln();
         // Color and font restoration
         $pdf->SetFillColor(224, 235, 255);
         $pdf->SetTextColor(0);
@@ -336,6 +332,15 @@ class Impresion extends Controller
         $pdf->Cell(260, 7, "Puno, ". $fecActual, 0, 0, 'R');
 
         $pdf->Output();
+    }
+
+    function pdfFecha()
+    {
+        echo $this->view->d1;
+        echo $this->view->d2;
+        echo $this->view->d3;
+
+
     }
 
     // FUNCION PARA CONVERTIR A ISO-8859-1 Y USAR ENIE

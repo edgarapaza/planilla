@@ -1,12 +1,8 @@
 var host = "localhost";
-<<<<<<< HEAD
-var tipo = $("#tipo").val();
-=======
 //console.log("funciona!!!");
 // agregar editar-> debe tener un filtro por fecha
 // al Ingresar, se muestre sus datos iniciales, y con el filtro se complete todo los demas datos
 // automaticamente
->>>>>>> 2df91fb5278937c8772ea95483f960672340c1d7
 var registrosPorPagina = 100;
 var paginaActual = 1;
 var paginasMostradas = 7;
@@ -36,6 +32,7 @@ function table() {
                     </td>
                     <td>
                     <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+
                     <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                     </td>
                 </tr>`;
@@ -48,6 +45,7 @@ function table() {
                     <td>${element.fecha_final}</td>
                     <td>
                     <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+
                     <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                     </td>
                 </tr>`;
@@ -95,6 +93,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         </td>
                         <td>
                         <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+
                         <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                         </td>
                     </tr>`;
@@ -107,6 +106,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         <td>${element.fecha_final}</td>
                         <td>
                         <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
+
                         <a href="http://${host}/planilla/impresion/fonavi/${element.id}" class="button warning" target="_blank">FONAVI</a>
                         </td>
                     </tr>`;

@@ -1968,6 +1968,38 @@ class PDF extends FPDF
 
         $this->Cell(20, 5, 'FECHA: ' . $fecInicio1 . ' hasta ' . $fecInicio2, 0, 1, 'L');
 
+       /* $cabece = array('Desde', 'Hasta', 'Dias', 'CARGO', 'BASICA', 'MUC', 'BET', 'REUNIF', 'D.S.276', 'OTROS', 'TOTAL REMU', '20530', '19990', 'AFP', 'IPSS', 'FONAVI');
+        // Colors, line width and bold font
+        $this->SetFillColor(200, 100, 100);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(128, 0, 0);
+        $this->SetLineWidth(.3);
+        $this->SetFont('', 'B');
+        // Header
+        $w0 = array(16, 16, 8, 40, 15, 15, 15, 15, 15, 22, 22, 15, 15, 15, 15);*/
+
+        $this->SetFont('Arial', 'B', 9);
+		// Move to 8 cm to the right
+
+        $this->Cell(16, 7, 'Desde', 1, 0, 'L');
+        $this->Cell(16, 7, 'Hasta', 1, 0, 'L');
+        $this->Cell(8, 7, 'Dias', 1, 0, 'L');
+        $this->Cell(40, 7, 'Cargo', 1, 0, 'L');
+        $this->Cell(15, 7, 'BASICA', 1, 0, 'L');
+        $this->Cell(15, 7, 'MUC', 1, 0, 'L');
+        $this->Cell(15, 7, 'BET', 1, 0, 'L');
+        $this->Cell(15, 7, 'REUNIF', 1, 0, 'L');
+        $this->Cell(15, 7, 'D.S.276', 1, 0, 'L');
+        $this->Cell(22, 7, 'OTROS', 1, 0, 'L');
+        $this->Cell(22, 7, 'TOTAL REMU', 1, 0, 'L');
+        $this->Cell(15, 7, '20530', 1, 0, 'L');
+        $this->Cell(15, 7, '19990', 1, 0, 'L');
+        $this->Cell(15, 7, 'AFP', 1, 0, 'L');
+        $this->Cell(15, 7, 'IPSS', 1, 0, 'L');
+        $this->Cell(15, 7, 'FONAVI', 1, 0, 'L');
+        $this->Ln();
+
+
     }
 
     // Page footer
@@ -2005,7 +2037,6 @@ class PDF extends FPDF
             $this->Ln();
         }
     }
-
 
     // Better table
     function ImprovedTable($header, $data)
@@ -2059,6 +2090,8 @@ class PDF extends FPDF
         // Closing line
         $this->Cell(array_sum($w), 0, '', 'T');
     }
+
+
 }
 class Fonavi extends FPDF
 {
