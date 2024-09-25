@@ -16,6 +16,9 @@ class Impresion extends Controller
             $this->view->Render("main/inicio");
         }
 
+        # Calcular la suma total de dias
+        $suma_total = array();
+
         setlocale(LC_TIME, 'es_ES.UTF-8');
 
         $persona = $this->model->buscarxId($id);
@@ -125,6 +128,7 @@ class Impresion extends Controller
             $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $sum1, 'L', 0, 'L', $fill);
             $pdf->Ln();
             /* Limpiando el array*/
+            array_push($suma_total, $sum1);
             unset($dias1);
         }
 
@@ -189,6 +193,7 @@ class Impresion extends Controller
 
             $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $stot1, 'L', 0, 'L', $fill);
             $pdf->Ln();
+            array_push($suma_total, $stot1);
             /* Limpiando el array*/
             unset($dias2);
         }
@@ -254,6 +259,7 @@ class Impresion extends Controller
             }
             $pdf->Cell(15, 6, '      TOTAL DIAS: ' . $sum3, 'L', 0, 'L', $fill);
             $pdf->Ln();
+            array_push($suma_total, $sum3);
             /* Limpiando el array*/
             unset($dias3);
         }
@@ -294,6 +300,29 @@ class Impresion extends Controller
         $timestamp2 = strtotime($fechafinal[count($fechafinal) - 1]);
         $fecInicio2 = strftime("%d de %B del %Y", $timestamp2);
 
+        $sumu1 =0;
+        for($u=1; $u< count($suma_total);$u++)
+        {
+            $sumu1 = $sumu1 + $suma_total[$u];
+        }
+        #echo "Total de dias: " . $sumu1;
+
+        $totalDias = $sumu1;
+
+        // Un año tiene 365 días
+        $años = floor($totalDias / 365);
+
+        // Restamos los días completos de los años para obtener los días restantes
+        $diasRestantes = $totalDias % 365;
+
+        // Un mes promedio tiene 30.44 días
+        $meses = floor($diasRestantes / 30.44);
+
+        // Restamos los días completos de los meses para obtener los días restantes
+        $dias = round($diasRestantes % 30.44);
+
+        #echo "$totalDias días son aproximadamente $años años, $meses meses y $dias días.";
+
         // convierte texto a iso88591------------------------------
 
         //$info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$muestra['anios']." años, ".$muestra['meses']." meses , ".ceil($muestra['dias'])." dias, en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
@@ -309,7 +338,7 @@ class Impresion extends Controller
         $aniosServicio = $interval->y;
         $mesesServicio = $interval->m;
         $diasServicio = $interval->d;
-        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$aniosServicio." año(s), ".$mesesServicio." mes(es) , ".ceil($diasServicio)." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$años." años, ".$meses." meses y ". $dias ." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
         // INFO ZETA END 
 
         // convierte texto a iso88591
