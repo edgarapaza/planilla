@@ -2070,7 +2070,7 @@ class PDF extends FPDF
         $this->SetFont('', 'B');
         // Header
         $w = array(40, 35, 40, 45);
-        for ($i = 0; $i < count($header); $i++)
+        for ($i = 0; $i < count($header)-1; $i++)
             $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration

@@ -33,6 +33,7 @@ h3 {
 label {
     font-size: 1.25rem !important;
     color: var(--blue-950);
+    text-align: right;
     padding-right: 1rem;/*Eliminar esta linea para alinear a la izquierda*/
 }
 span{

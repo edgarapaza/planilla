@@ -1,5 +1,5 @@
 <?php
-require_once 'fpdf.php';    
+require_once 'fpdf.php';
 
 class Impresion extends Controller
 {
@@ -272,6 +272,13 @@ class Impresion extends Controller
 
         $pdf->Ln(10);
         #MultiCell(float w, float h, string txt [, mixed border [, string align [, boolean fill]]])
+
+        #####################################################################################################
+        ###########      RESUMEN
+        #####################################################################################################
+
+        $pdf->AddPage();
+        $pdf->Ln(10);
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->Cell(280, 7, 'RESUMEN', 0, 0, 'C');
         $pdf->Ln();
@@ -322,11 +329,6 @@ class Impresion extends Controller
         $dias = round($diasRestantes % 30.44);
 
         #echo "$totalDias días son aproximadamente $años años, $meses meses y $dias días.";
-
-        // convierte texto a iso88591------------------------------
-
-        //$info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$muestra['anios']." años, ".$muestra['meses']." meses , ".ceil($muestra['dias'])." dias, en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
-        // INFO ZETA, MODO PRUEBA
         //$consultaFechas = $this->model->consultaFechas($nombre,$ap,$am);
         $date_inicio = new DateTime($consultaFechas['inicio']);
         $date_final = new DateTime($consultaFechas['final']);
@@ -339,7 +341,6 @@ class Impresion extends Controller
         $mesesServicio = $interval->m;
         $diasServicio = $interval->d;
         $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$años." años, ".$meses." meses y ". $dias ." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
-        // INFO ZETA END 
 
         // convierte texto a iso88591
         $ene = $this->utf8_to_iso88591($info);

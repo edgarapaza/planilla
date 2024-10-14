@@ -1,0 +1,13 @@
+planillas
+andres arapa pineda
+
+nov 2017
+basica 50.04
+Rem reunifica
+ds 276
+la resta de los 3 otros
+total general
+587.93 
+
+Ingresar planilla
+agregar nueva planilla
