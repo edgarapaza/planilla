@@ -17,7 +17,6 @@ if($_SESSION['tipo']=='viewer'){
     </div>
 </div>
 
-/* Inicio de la planilla de pagos */
 <div class="grid-container">
     <div class="grid-x">
         <div class="cell text-center titulo">
@@ -26,106 +25,157 @@ if($_SESSION['tipo']=='viewer'){
     </div>
     <form id="planillaForm" method="POST">
         <div class="grid-x grid-margin-x">
-            <div class="cell callout small-12 large-6">
-                        <div class="cell small-12 medium-2">
-                            <label for="nombres">Nombres :</label>
+            <div class="columns callout small-12 large-6 ">
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4 ">
+                            <label for="nombres right-label">Nombres :</label>
                         </div>
-                        <div class="cell small-12 medium-4">
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="nombres" id="nombres" placeholder="Nombres"
                                 value="<?php echo @$this->data['nombres']; ?>">
                         </div>
-                        <div class="cell small-12 medium-2">
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="apellidop">Apellido Paterno :</label>
                         </div>
-                        <div class="cell small-12 medium-4">
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="apellidopa" id="apellidop" placeholder="Apellido paterno"
                                 value="<?php echo @$this->data['ap']; ?>">
                         </div>
-                        <div class="cell small-12 medium-2">
+                </div>
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="apellidom">Apellido Materno :</label>
                         </div>
-                        <div class="cell small-12 medium-8">
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="apellidoma" id="apellidom" placeholder="Apellido Materno"
                                 value="<?php echo @$this->data['am']; ?>">
                         </div>
-                        <div class="cell small-12 medium-2">
+                </div>
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="cargo">Cargo :</label>
                         </div>
-                        <div class="cell small-12 medium-8">
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="cargo" id="cargo" placeholder="Cargo"
                                 value="<?php echo @$this->data['cargo']; ?>">
                         </div>
+                </div>
             </div>
 
             <div class="cell callout small-12 large-6">
                 <div class="grid-x">
-                    <div class="cell">
-                        <span>
-                            <label for="fechaI">Desde la Fecha :</label>
+                        <div class="columns small-12 medium-4">
+                             <label for="fechaI">Desde la Fecha :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="date" name="fechaI" id="fechaI" placeholder="12-12-1999">
-                        </span>
-                        <span>
-                            <label for="fechaF">Hasta la Fecha :</label>
+                        </div>
+                </div>
+                <div class="grid-x">
+                    <div class="columns small-12 medium-4">
+                             <label for="fechaF">Hasta la Fecha :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="date" name="fechaF" id="fechaF" placeholder="12-12-2015">
-                        </span>
-                        <span>
-                            <label for="condicion">Condicion :</label>
+                        </div>
+                </div>
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
+                             <label for="condicion">Condicion :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <select id="condicion" name="condicion">
                                 <option value="A">Activo</option>
                                 <option value="P">Pensionista</option>
                             </select>
-                        </span>
-                        <span>
+                        </div>
+                </div>
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="moneda">Moneda :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <select id="moneda" name="moneda">
                                 <option value="S">Nuevo Sol</option>
                                 <option value="I">Intis</option>
                                 <option value="O">Sol Oro</option>
                             </select>
-                        </span>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
 
-            <div class="cell callout">
+        <div class="grid-x grid-margin-x">
+            <div class="columns callout small-12 large-6">
                 <div class="grid-x">
-                    <div class="cell">
-                        <span>
-                            <label for="muc">Muc. :</label>
+                        <div class="columns small-12 medium-4">
+                             <label for="muc">Muc. :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="muc" id="muc" placeholder="0.00" value="0">
-                        </span>
-                        <span>
+                        </div>
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="vet">Bet. :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="vet" id="vet" placeholder="0.00" value="0">
-                        </span>
-                        <span>
+                        </div>
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="remBasica">Rem. basica :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="remBasica" id="remBasica" placeholder="0.00">
-                        </span>
-                        <span>
+                        </div>
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="remReunificada">Rem. Reunificada :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="remReunificada" id="remReunificada" placeholder="0.00">
-                        </span>
-                        <span>
+                        </div>
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="desupremo">D. supremo 276 :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="desupremo" id="desupremo" placeholder="0.00">
-                        </span>
-                        <span>
+                        </div>
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="otros">Otros :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="otros" id="otros" placeholder="0.00">
-                        </span>
-                        <span id="total">
+                        </div>
+                </div>
+
+                <div class="grid-x">
+                        <div class="columns small-12 medium-4">
                             <label for="totalRemu">Total Remu :</label>
+                        </div>
+                        <div class="columns small-12 medium-8">
                             <input type="text" name="total" id="totalRemu" placeholder="0.00">
-                        </span>
-                    </div>
+                        </div>
                 </div>
             </div>
-            <div class="cell callout">
-                <div class="grid-x grid-margin-x">
-
-                        <div class="cell small-12 medium-2">
+            <div class="cell callout small-12 large-6">
+                <div class="grid-x">
+                        <div class="cell small-12 medium-4">
                             <label for="ley19990">Ley 19990 :</label>
                         </div>
                         <div class="cell small-12 medium-8">
@@ -178,6 +228,7 @@ if($_SESSION['tipo']=='viewer'){
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 
     <script src="<?php echo constant('URL'); ?>public/js/planilla.js"></script>
