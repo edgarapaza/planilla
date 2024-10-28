@@ -166,10 +166,13 @@ if($_SESSION['tipo']=='viewer'){
 
                 <div class="grid-x">
                         <div class="columns small-12 medium-4">
-                            <label for="totalRemu">Total Remu :</label>
+                            <label for="totalRemu">Total Remuneración :</label>
                         </div>
-                        <div class="columns small-12 medium-8">
+                        <div class="columns small-12 medium-6">
                             <input type="text" name="total" id="totalRemu" placeholder="0.00">
+                        </div>
+                        <div class="columns small-12 medium-2">
+                            <button>Calcular</button>
                         </div>
                 </div>
             </div>
