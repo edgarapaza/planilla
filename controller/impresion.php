@@ -308,7 +308,7 @@ class Impresion extends Controller
         $fecInicio2 = strftime("%d de %B del %Y", $timestamp2);
 
         $sumu1 =0;
-        for($u=1; $u< count($suma_total);$u++)
+        for($u=0; $u< count($suma_total);$u++)
         {
             $sumu1 = $sumu1 + $suma_total[$u];
         }
@@ -340,7 +340,7 @@ class Impresion extends Controller
         $aniosServicio = $interval->y;
         $mesesServicio = $interval->m;
         $diasServicio = $interval->d;
-        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$años." años, ".$meses." meses y ". $dias ." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum['cargo'] . " con una remuneración de:";
+        $info = "De lo detallado de las paginas, se desprende que Don(ña):  " . $ap . " " . $am . ", " . $nombre . " ha prestado sus servicios al Estado desde " . $fecInicio1 . " hasta " . $fecInicio2 . " durante ".$años." años, ".$meses." meses y ". $dias ." dia(s), en condicion de " . $tipoemleado . " con el cargo de " . $resum3['cargo'] . " con una remuneración de:";
 
         // convierte texto a iso88591
         $ene = $this->utf8_to_iso88591($info);
