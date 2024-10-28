@@ -289,12 +289,13 @@ class Impresion extends Controller
         $resum = $this->model->planillao($nombre, $ap, $am);
         $resum2 = $this->model->planillai($nombre, $ap, $am);
         $resum3 = $this->model->planillas($nombre, $ap, $am);
+        $resum4 = $this->model->planillas2($nombre, $ap, $am);
         // #echo "Inicio: ". $fechainicio[0];
         // #echo " Fin:". $fechafinal[count($fechafinal)-1];
          /* Llamando a Calculadora de Años meses y dias*/
 
         $muestra = $this->model->Calculadora($fechainicio[0], $fechafinal[count($fechafinal)-1], $id);
-        if($resum['trabajador'] === "E"){
+        if($resum3['trabajador'] === "E"){
             $tipoemleado = "Empleado";
         }else{
             $tipoemleado = "Obrero";
@@ -335,7 +336,9 @@ class Impresion extends Controller
     
         // Calcular la diferencia
         $interval = $date_inicio->diff($date_final);
-    
+
+        // HALLANDO LA SUMA TOTAL:  rembasica,remunifi,ds276,remotros,muc, vet
+
         // Obtener los años, meses y días
         $aniosServicio = $interval->y;
         $mesesServicio = $interval->m;
@@ -352,7 +355,7 @@ class Impresion extends Controller
         $pdf->Ln();
         $pdf->Cell(100, 7, 'En Intis......................: ' . $resum2['bruto'], 0, 0, 'R');
         $pdf->Ln();
-        $pdf->Cell(100, 7, 'En Nuevos Soles..................: ' . $resum3['bruto'], 0, 0, 'R');
+        $pdf->Cell(100, 7, 'En Nuevos Soles..................: ' . $resum4['bruto'] , 0, 0, 'R');
         $pdf->Ln();
         $pdf->MultiCell(270, 7, "Es cuanto CERTIFICA: La Unidad de Archivos y Liquidaciones de la Direccion Regional de Transportes, Comunicaciones, Vivienda y Construccion - Puno, tal como obran las copias de planillas en esta Unidad, se expide dicha Constancia Certificada de Pagos de Remuneraciones y Descuentos a solicitud del interesado para los fines que vea convenitente.:", 0, 'L');
 

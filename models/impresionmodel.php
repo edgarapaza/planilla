@@ -67,6 +67,15 @@ class ImpresionModel extends Model
 
 	function planillas($nombre,$ap,$am)
 	{
+		$sql ="SELECT spdat1, spdat2,cargo,trabajador, rembasica,remunifi,ds276,remotros,muc, vet
+		FROM planilla
+		WHERE moneda = 'S' AND ap = '$ap' AND am='$am' AND nombres ='$nombre' ORDER BY spdat2 DESC;";
+		$data = $this->conn->ConsultaArray($sql);
+		return $data;
+	}
+
+	function planillas2($nombre,$ap,$am)
+	{
 		$sql ="SELECT spdat1, spdat2,cargo,trabajador, format(sum(rembasica+remunifi+ds276+remotros+muc+vet),2) as bruto
 		FROM planilla
 		WHERE moneda = 'S' AND ap = '$ap' AND am='$am' AND nombres ='$nombre';";
