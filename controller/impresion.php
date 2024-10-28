@@ -318,10 +318,10 @@ class Impresion extends Controller
         $totalDias = $sumu1;
 
         // Un año tiene 365 días
-        $años = floor($totalDias / 365);
+        $años = floor($totalDias / 358);
 
         // Restamos los días completos de los años para obtener los días restantes
-        $diasRestantes = $totalDias % 365;
+        $diasRestantes = $totalDias % 358;
 
         // Un mes promedio tiene 30.44 días
         $meses = floor($diasRestantes / 30.44);
