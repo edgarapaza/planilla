@@ -18,6 +18,15 @@ class PlanillaDetalle extends Controller
         $this->view->data = $data;
         $this->view->Render('planillaDetalle/index');
     }
+
+    public function ChangeNombre($parant = null)
+    {
+        $id = $parant[0];
+        $data = $this->model->GetPlanillaPersonal($id);
+        $this->view->data = $data;
+        $this->view->Render('planillaDetalle/name');
+    }
+
     public function getPlanilla()
     {
         $nombres = $_POST['nombres'];
@@ -76,6 +85,25 @@ class PlanillaDetalle extends Controller
             echo "ERROR";
         }
     }
+
+    public function names()
+    {
+        # se obtiene los datos
+        $nombre = strtoupper($_POST['nombre']);
+        $apellidopa = strtoupper($_POST['paterno']);
+        $apellidoma = strtoupper($_POST['materno']);
+
+        $idpersonal = $_POST['idpersonal'];
+        $codPersonal = $_POST['codPersonal'];
+        $id = $_POST['id'];
+        $res = $this->model->UpdateNombre($nombre, $apellidopa, $apellidoma, $codPersonal);
+        if ($res) {
+                echo "EXITO";
+            } else {
+                echo "ERROR";
+            }
+    }
+
     public function getAllPlanilla()
     {
         $nombres = $_POST['nombres'];

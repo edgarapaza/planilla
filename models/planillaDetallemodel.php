@@ -30,4 +30,9 @@ class PlanillaDetalleModel extends Model
     $data = $this->conn->ConsultaCon($sql);
     return $data;   
   }
+  public function UpdateNombre($nombre, $ap, $am, $idper){
+    $sql = "UPDATE planilla SET nombres = '$nombre', ap = '$ap', am = '$am' WHERE id = '$idper';";
+    $res = $this->conn->ConsultaSin($sql);
+    return $res;
+  }
 }

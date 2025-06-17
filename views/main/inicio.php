@@ -85,6 +85,7 @@
             <td>
               <a href="#" class="button">Ingresar Planilla</a> |
               <a href="#" class="button">Editar</a>
+              <a href="#" class="button">Editar Nombre</a>
             </td>
             <td>
               <a href="#" class="button success">Planilla</a>

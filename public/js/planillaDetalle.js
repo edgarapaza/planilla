@@ -186,6 +186,62 @@ $("#planillaForm").submit(function (event) {
   });
 });
 
+$("#changeName").submit(function (event) {
+  event.preventDefault(); // Evitar envío predeterminado
+
+  const nombre = document.getElementById("nombres").value;
+  const apepater = document.getElementById("apellidop").value;
+  const apemater = document.getElementById("apellidom").value;
+  const idpersonal = document.getElementById("idpersonal").value;
+  const codPersonal = document.getElementById("codPersonal").value;
+
+
+  const confirmacion = confirm("¿Está seguro que desea realizar los cambios?");
+    if (confirmacion) {
+
+      $.ajax({
+        type: "POST",
+        url: `http://${host}/planilla/planillaDetalle/names`,
+        data: {'nombre':nombre,
+              'paterno': apepater,
+              'materno':apemater,
+              'codPersonal': codPersonal,
+              'idpersonal': idpersonal},
+
+        success: function (response) {
+          // Respuesta del servidor
+          //alert("Cambios realizados");
+          console.log(response);
+          if (response == "ERROR") {
+            //Mensaje modal de ingreso exitoso
+            $("#title-modal").text("Ingreso Fallido");
+            $("#text-modal").text(
+              "Revise los datos ingresados, uno o mas de los campos no tienen el dato requerido"
+            );
+            $("#img-modal").attr(
+              "src",
+              `http://${host}/planilla/public/img/falla.png`
+            );
+            //mensaje modal END
+            $(".modal-overlay").fadeIn();
+          } else {
+            table();
+            //Mensaje modal de ingreso exitoso
+            $("#title-modal").text("Cambio de nombre exitoso");
+            $("#text-modal").text("Cierre la ventana y continue con el trabajo");
+            $("#img-modal").attr(
+              "src",
+              `http://${host}/planilla/public/img/mujer-de-negocios.png`
+            );
+
+          }
+        },
+        error: function (error) {
+          console.error("Error en la solicitud", error);
+        },
+      });
+    }
+});
 // Cerrar modal al hacer clic en el botón de cerrar o en el fondo oscuro de superposición
 $(".close-modal, .modal-overlay").click(function () {
   $(".modal-overlay").fadeOut();

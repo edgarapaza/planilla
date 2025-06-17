@@ -29,6 +29,7 @@ function table() {
                     <td>
                     <a href="http://${host}/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
                     <a href="http://${host}/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
+                    <a href="http://${host}/planilla/planillaDetalle/ChangeNombre/${element.id}" class="button alert">Editar Nombre</a>
                     </td>
                     <td>
                     <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
@@ -90,6 +91,7 @@ $("#mysearch, #mysearch1,#mysearch2,#mysearch3").keyup(function () {
                         <td>
                         <a href="http://${host}/planilla/main/renderPlanilla/${element.id}" class="button">Ingresar Planilla</a>
                         <a href="http://${host}/planilla/planillaDetalle/renderDetalle/${element.id}" class="button alert">Editar</a>
+                        <a href="http://${host}/planilla/planillaDetalle/ChangeNombre/${element.id}" class="button alert">Editar nombre</a>
                         </td>
                         <td>
                         <a href="http://${host}/planilla/impresion/pdf/${element.id}" class="button success" target="_blank">Planilla</a>
